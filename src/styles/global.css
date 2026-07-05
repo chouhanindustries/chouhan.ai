@@ -115,12 +115,20 @@ a {
 
 /* ── Hero ────────────────────────────────────────────────── */
 #hero {
-  min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 0 40px;
   position: relative;
+}
+
+/* svh keeps the scroll hint visible under mobile browser UI (e.g. Android
+   Chrome's URL bar); vh fallback for browsers without svh support */
+@supports not (min-height: 100svh) {
+  #hero {
+    min-height: 100vh;
+  }
 }
 
 .hero-inner {
