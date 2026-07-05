@@ -1,0 +1,43 @@
+---
+// Site navbar + mobile menu. On the homepage the navbar starts transparent
+// (script.js adds .scrolled on scroll); every other page starts solid.
+interface Props {
+  home?: boolean;
+}
+
+const { home = false } = Astro.props;
+
+const links = [
+  { href: 'products.html', label: 'Products' },
+  { href: 'open-source.html', label: 'Open Source' },
+  { href: 'about.html', label: 'About' },
+  { href: 'blog.html', label: 'Blog' },
+  { href: 'careers.html', label: 'Careers' },
+  { href: 'contact.html', label: 'Contact' },
+];
+---
+
+<nav id="navbar" class:list={[{ scrolled: !home }]}>
+  <div class="nav-inner">
+    <a href={home ? '#' : 'index.html'} class="wordmark"><img src="assets/favicons/logo-icon.svg" alt="Chouhan Industries"
+        class="nav-logo">CHOUHAN INDUSTRIES</a>
+    <ul class="nav-links">
+      {links.map((link) => (
+        <li><a href={link.href}>{link.label}</a></li>
+      ))}
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+  <ul>
+    {links.map((link) => (
+      <li><a href={link.href}>{link.label}</a></li>
+    ))}
+  </ul>
+</div>

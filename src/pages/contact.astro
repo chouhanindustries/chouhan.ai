@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Contact | Chouhan Industries | Get in Touch"
+  ogTitle="Contact | Chouhan Industries"
+  description="Reach out for partnerships, manufacturing inquiries, press, or a conversation about open hardware."
+  url="https://chouhan.ai/contact.html"
+>
+
+  <div class="page-hero">
+    <div class="section-inner">
+      <p class="eyebrow">Get in Touch</p>
+      <h1>Contact</h1>
+      <p class="page-sub">Partnerships, manufacturing inquiries, press, or just a conversation about open hardware.</p>
+    </div>
+  </div>
+
+  <section class="page-section">
+    <div class="section-inner">
+      <div class="contact-layout">
+        <div class="contact-info">
+          <h3>Chouhan Industries</h3>
+          <p>We respond to every inquiry. If your question is about a product design or a technical issue, raising a
+            public issue on the repository is faster and benefits everyone.</p>
+
+          <div class="contact-detail">
+            <p class="label">Email</p>
+            <a href="mailto:chouhanindustries@outlook.com">chouhanindustries@outlook.com</a>
+          </div>
+          <div class="contact-detail">
+            <p class="label">X</p>
+            <a href="https://x.com/chouhan_ai" target="_blank" rel="noopener noreferrer">@chouhan_ai</a>
+          </div>
+          <div class="contact-detail">
+            <p class="label">LinkedIn</p>
+            <a href="https://www.linkedin.com/company/chouhan-industries" target="_blank"
+              rel="noopener noreferrer">Chouhan Industries</a>
+          </div>
+          <div class="contact-detail">
+            <p class="label">GitHub</p>
+            <a href="https://github.com/animesh-chouhan" target="_blank"
+              rel="noopener noreferrer">github.com/animesh-chouhan</a>
+          </div>
+        </div>
+
+        <form class="contact-form" id="contact-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" placeholder="Your name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="your@email.com" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <select id="subject" name="subject">
+              <option value="">Select a topic</option>
+              <option value="partnership">Partnership</option>
+              <option value="manufacturing">Manufacturing Inquiry</option>
+              <option value="careers">Careers</option>
+              <option value="press">Press</option>
+              <option value="contribution">Open Source Contribution</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="6" placeholder="Your message" required></textarea>
+          </div>
+          <button type="submit" class="btn-submit">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

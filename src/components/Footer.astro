@@ -1,0 +1,43 @@
+---
+interface Props {
+  home?: boolean;
+}
+
+const { home = false } = Astro.props;
+
+const links = [
+  { href: 'products.html', label: 'Products' },
+  { href: 'open-source.html', label: 'Open Source' },
+  { href: 'about.html', label: 'About' },
+  { href: 'blog.html', label: 'Blog' },
+  { href: 'careers.html', label: 'Careers' },
+  { href: 'contact.html', label: 'Contact' },
+];
+---
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <a href={home ? '#' : 'index.html'} class="footer-wordmark"><img src="assets/favicons/logo-icon.svg" alt="Chouhan Industries"
+          class="footer-logo">CHOUHAN INDUSTRIES</a>
+      <nav class="footer-nav">
+        {links.map((link) => (
+          <a href={link.href}>{link.label}</a>
+        ))}
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        <a href="https://ohwr.org/project/cernohl/-/wikis/uploads/819d71bea3458f71fba6cf4fb0f2de6b/cern_ohl_s_v2.txt"
+          target="_blank" rel="noopener noreferrer">CERN OHL v2.0</a>
+        <a href="https://animeshchouhan.com" target="_blank" rel="noopener noreferrer">animeshchouhan.com</a>
+      </div>
+      <p class="footer-copy">&copy; 2026 Chouhan Industries. All rights reserved.</p>
+      <div class="footer-social">
+        <a href="https://x.com/chouhan_ai" target="_blank" rel="noopener noreferrer" aria-label="X">X</a>
+        <a href="https://www.linkedin.com/company/chouhan-industries" target="_blank" rel="noopener noreferrer"
+          aria-label="LinkedIn">in</a>
+      </div>
+    </div>
+  </div>
+</footer>

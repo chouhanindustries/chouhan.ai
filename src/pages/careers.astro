@@ -1,0 +1,118 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const roles = [
+  {
+    dept: 'Founding',
+    title: 'Founding Engineer',
+    desc: "Shape the company from the ground up. You'll work across hardware, process, and product with full ownership and no bureaucracy. Early, consequential, public.",
+  },
+  {
+    dept: 'Hardware',
+    title: 'Hardware Engineer',
+    desc: 'Design and iterate on mechanical and electronic systems. You will own the full cycle from schematic to production. All work published under CERN OHL.',
+  },
+  {
+    dept: 'Firmware',
+    title: 'Firmware Engineer',
+    desc: 'Write embedded software for our open hardware products. Low-level, close to silicon, and fully published. No black boxes.',
+  },
+  {
+    dept: 'Design',
+    title: 'Industrial Designer',
+    desc: "Own form factor, enclosures, and DFM. You'll design for real production constraints and publish every file under open license.",
+  },
+  {
+    dept: 'Manufacturing',
+    title: 'Manufacturing Lead',
+    desc: 'Own production quality and process documentation. You set the standard and you write it down. Nothing proprietary, nothing withheld.',
+  },
+  {
+    dept: 'Operations',
+    title: 'Supply Chain & Operations',
+    desc: 'Build the sourcing and vendor network that makes open hardware viable at scale. Transparent processes, documented decisions.',
+  },
+  {
+    dept: 'Software',
+    title: 'Software Engineer',
+    desc: 'Build the tools, interfaces, and infrastructure that support our hardware and open source ecosystem. Everything ships publicly.',
+  },
+  {
+    dept: 'Documentation',
+    title: 'Technical Writer',
+    desc: 'Write the specs, guides, and release documentation that make open hardware actually usable. Precision matters as much here as in the hardware itself.',
+  },
+  {
+    dept: 'Community',
+    title: 'Community Lead',
+    desc: 'Build and sustain the contributor ecosystem around our open source releases. Forums, events, and the people who keep this movement going.',
+  },
+  {
+    dept: 'Internship',
+    title: 'Hardware Intern',
+    desc: "Work directly on real hardware, no busywork, no shadowing. You'll contribute to schematics, documentation, and open source releases from day one.",
+  },
+];
+---
+
+<BaseLayout
+  title="Careers | Chouhan Industries | Open Hardware Jobs"
+  ogTitle="Careers | Chouhan Industries"
+  description="The same principles that guide our hardware guide how we hire. Transparency, craft, and no gatekeeping."
+  url="https://chouhan.ai/careers.html"
+>
+
+  <div class="page-hero">
+    <div class="section-inner">
+      <p class="eyebrow">Join Us</p>
+      <h1>Careers</h1>
+      <p class="page-sub">The same principles that guide our hardware guide how we hire. Transparency, craft, and no
+        gatekeeping.</p>
+    </div>
+  </div>
+
+  <section class="page-section">
+    <div class="section-inner">
+      <p class="section-label">Open Positions</p>
+
+      <div class="roles-list">
+        {roles.map((role) => (
+          <div class="role-item">
+            <div class="role-meta">
+              <span class="role-dept">{role.dept}</span>
+              <h3 class="role-title">{role.title}</h3>
+              <p class="role-desc">{role.desc}</p>
+            </div>
+            <a href="contact.html" class="role-apply">Apply</a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section surface">
+    <div class="section-inner">
+      <p class="section-label">How We Hire</p>
+      <div class="os-grid">
+        <div class="os-item">
+          <h3>No hidden criteria</h3>
+          <p>We tell you exactly what we're looking for before the first conversation. No surprises, no moving
+            goalposts.</p>
+        </div>
+        <div class="os-item">
+          <h3>What you've built, not where you went</h3>
+          <p>Send us something you made. A project, a schematic, a write-up. That tells us more than any resume.</p>
+        </div>
+        <div class="os-item">
+          <h3>No live pressure</h3>
+          <p>Every step is async. Take the time you need. We're not timing you.</p>
+        </div>
+        <div class="os-item">
+          <h3>Two weeks, guaranteed</h3>
+          <p>Every application gets a real response. Every process wraps within two weeks of first contact.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

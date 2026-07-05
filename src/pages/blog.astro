@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const posts = [
+  {
+    date: 'Jun 2025',
+    tag: 'Process',
+    title: 'Why We Publish Tolerances Before Shipping',
+    excerpt:
+      'Most manufacturers treat tolerance specs as proprietary. We think that is backwards. Here is why we publish them first and what it has taught us about our own quality standards.',
+  },
+  {
+    date: 'May 2025',
+    tag: 'Open Hardware',
+    title: 'CERN OHL-S vs. CERN OHL-W: Choosing Strongly Reciprocal',
+    excerpt:
+      'We chose the Strongly Reciprocal variant of the CERN Open Hardware License. This is what that means in practice and why the weaker variant was not enough.',
+  },
+  {
+    date: 'Apr 2025',
+    tag: 'Founding',
+    title: 'On Starting Chouhan Industries',
+    excerpt:
+      'What we are building, why we are building it in the open, and what we believe about the future of hardware manufacturing.',
+  },
+];
+---
+
+<BaseLayout
+  title="Blog | Chouhan Industries | Open Hardware Thinking"
+  ogTitle="Blog | Chouhan Industries"
+  description="Thinking on open hardware, manufacturing, and the future of transparent technology."
+  url="https://chouhan.ai/blog.html"
+>
+
+  <div class="page-hero">
+    <div class="section-inner">
+      <p class="eyebrow">Thinking in Public</p>
+      <h1>Blog</h1>
+      <p class="page-sub">Build logs, process notes, and essays on open hardware. Written as we go.</p>
+    </div>
+  </div>
+
+  <section class="page-section">
+    <div class="section-inner">
+      <div class="journal-list">
+        {posts.map((post) => (
+          <div class="journal-item">
+            <span class="date">{post.date}</span>
+            <div>
+              <span class="tag">{post.tag}</span>
+              <h3>{post.title}</h3>
+              <p>{post.excerpt}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
