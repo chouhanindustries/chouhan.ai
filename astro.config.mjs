@@ -6,6 +6,8 @@ export default defineConfig({
   // Emit products.astro -> /products.html (not /products/) so existing URLs keep working.
   build: {
     format: 'file',
+    // Embed the (minified) stylesheet in each page: first paint needs no CSS request.
+    inlineStylesheets: 'always',
   },
   // Keep readable HTML output, matching the hand-written originals.
   compressHTML: false,

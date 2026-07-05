@@ -1,5 +1,7 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import oshwLogo from '../assets/oshw-logo-800-px.webp';
 ---
 
 <BaseLayout
@@ -33,7 +35,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           anyone to study, build upon, and improve. We manufacture to the highest standard and publish
           everything: schematics, processes, and tolerances, without restriction.
         </p>
-        <img src="logos/oshw-logo-800-px.webp" alt="Open Source Hardware" class="oshw-badge">
+        <Image src={oshwLogo} alt="Open Source Hardware" width={140} densities={[1, 2]} class="oshw-badge" />
       </div>
     </div>
   </section>
@@ -45,21 +47,21 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="capability-item">
           <span class="cap-number">01</span>
           <div class="cap-rule"></div>
-          <h3>Open Source</h3>
+          <h2>Open Source</h2>
           <p>Every schematic, tolerance spec, and process document is public record. No proprietary lock-in.
             No licensing walls.</p>
         </div>
         <div class="capability-item">
           <span class="cap-number">02</span>
           <div class="cap-rule"></div>
-          <h3>Manufacturing</h3>
+          <h2>Manufacturing</h2>
           <p>Full-stack production across mechanical, electronic, and systems hardware. Every step owned
             in-house.</p>
         </div>
         <div class="capability-item">
           <span class="cap-number">03</span>
           <div class="cap-rule"></div>
-          <h3>Quality Assurance</h3>
+          <h2>Quality Assurance</h2>
           <p>Testing is not a phase. It is the process. Every unit meets the same standard, without exception.
           </p>
         </div>

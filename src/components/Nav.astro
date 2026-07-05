@@ -19,8 +19,8 @@ const links = [
 
 <nav id="navbar" class:list={[{ scrolled: !home }]}>
   <div class="nav-inner">
-    <a href={home ? '#' : 'index.html'} class="wordmark"><img src="assets/favicons/logo-icon.svg" alt="Chouhan Industries"
-        class="nav-logo">CHOUHAN INDUSTRIES</a>
+    <a href={home ? '#hero' : 'index.html'} class="wordmark"><img src="assets/favicons/logo-icon.svg" alt="Chouhan Industries"
+        width="259" height="251" class="nav-logo">CHOUHAN INDUSTRIES</a>
     <ul class="nav-links">
       {links.map((link) => (
         <li><a href={link.href}>{link.label}</a></li>
