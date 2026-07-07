@@ -1,0 +1,282 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Open Telegraph | Chouhan Industries | Open Hardware"
+  ogTitle="Open Telegraph | Chouhan Industries"
+  description="A pocket-size Morse key. One button, an ESP32-S3, and a battery. Types Morse into any phone or computer as a standard keyboard, over USB-C or Bluetooth."
+  url="https://chouhan.ai/products/open-telegraph.html"
+>
+
+  <div class="page-hero">
+    <div class="section-inner">
+      <p class="eyebrow"><a href="/products.html" style="color: inherit; text-decoration: none;">Products</a> / Open Telegraph</p>
+      <h1>Open Telegraph</h1>
+      <p class="page-sub">A pocket-size Morse key. One button, one RGB LED, an ESP32-S3, and a battery. Plug it in over
+        USB-C or pair it over Bluetooth and it types Morse into any device as a standard keyboard. Fully open, down to
+        the copper.</p>
+    </div>
+  </div>
+
+  <section class="page-section surface" id="telegraph">
+    <div class="section-inner">
+      <div class="about-body">
+        <div>
+          <p class="section-label">The Problem</p>
+          <p class="lead">Morse code has no modern hardware.</p>
+          <div class="detail">
+            <p>Telegraph keys are museum pieces or ham-radio accessories. Nothing plugs into the devices people
+              actually use. Learning Morse today means a radio license, a rig, and a wall of legacy equipment before
+              you send a single character.</p>
+            <p>The oldest digital protocol deserves a first-class input device. Nobody builds one.</p>
+          </div>
+        </div>
+        <div>
+          <p class="section-label">The Approach</p>
+          <p class="lead">A single button as a universal keyboard.</p>
+          <div class="detail">
+            <p>Open Telegraph decodes Morse in firmware and presents itself as a standard HID keyboard. USB on the desk,
+              Bluetooth in the pocket. No drivers, no companion software required. It works in any app on any
+              operating system.</p>
+            <p>It answers one question: can a single button type on your phone and computer? Everything that is not
+              that question was cut.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="section-inner">
+      <p class="section-label">Architecture</p>
+      <h2
+        style="font-family: var(--font-display); font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 300; margin-bottom: 48px;">
+        One button. Any device.</h2>
+      <div class="stack-diagram">
+        <div class="stack-layer">
+          <div class="stack-info">
+            <p class="stack-label">Interaction</p>
+            <p class="stack-desc">Everything the user ever touches.</p>
+          </div>
+          <div class="stack-chips">
+            <span class="stack-chip">Short Press: Key</span>
+            <span class="stack-chip">Double Press: Pair</span>
+            <span class="stack-chip">Triple Press: USB / BT</span>
+            <span class="stack-chip">Long Hold: Power</span>
+          </div>
+        </div>
+        <div class="stack-layer stack-api">
+          <div class="stack-info">
+            <p class="stack-label">Firmware</p>
+            <p class="stack-desc">Turns presses into keystrokes.</p>
+          </div>
+          <div class="stack-chips">
+            <span class="stack-chip">Morse Decoder</span>
+            <span class="stack-chip">USB HID</span>
+            <span class="stack-chip">Bluetooth HID</span>
+            <span class="stack-chip">BLE UART</span>
+            <span class="stack-chip">Power Management</span>
+          </div>
+        </div>
+        <div class="stack-layer">
+          <div class="stack-info">
+            <p class="stack-label">Hardware</p>
+            <p class="stack-desc">Computing, power, and radio on one board.</p>
+          </div>
+          <div class="stack-chips">
+            <span class="stack-chip">ESP32-S3-WROOM</span>
+            <span class="stack-chip">USB-C</span>
+            <span class="stack-chip">LiPo Charger</span>
+            <span class="stack-chip">Tactile Switch</span>
+            <span class="stack-chip">RGB LED</span>
+          </div>
+        </div>
+        <div class="stack-layer stack-modules">
+          <div class="stack-info">
+            <p class="stack-label">Expansion Header</p>
+            <p class="stack-desc">Six pins for everything else.</p>
+          </div>
+          <div class="stack-chips">
+            <span class="stack-chip">OLED</span>
+            <span class="stack-chip">Rotary Encoder</span>
+            <span class="stack-chip">Real Telegraph Key</span>
+            <span class="stack-chip">LoRa</span>
+            <span class="stack-chip">Sounder</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="section-inner">
+      <p class="section-label">Design</p>
+      <h2
+        style="font-family: var(--font-display); font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 300; margin-bottom: 48px;">
+        Everything essential. Nothing else.</h2>
+      <div class="omp-grid">
+        <div class="omp-item">
+          <p class="omp-title">Core</p>
+          <ul class="module-list">
+            <li>ESP32-S3-WROOM Module</li>
+            <li>Native USB</li>
+            <li>Bluetooth LE</li>
+            <li>Wi-Fi On Board</li>
+          </ul>
+        </div>
+        <div class="omp-item">
+          <p class="omp-title">Connectivity</p>
+          <ul class="module-list">
+            <li>USB HID Keyboard</li>
+            <li>Bluetooth HID Keyboard</li>
+            <li>BLE UART Channel</li>
+            <li>No Drivers Required</li>
+          </ul>
+        </div>
+        <div class="omp-item">
+          <p class="omp-title">Power</p>
+          <ul class="module-list">
+            <li>Rechargeable LiPo</li>
+            <li>USB-C Charging</li>
+            <li>Long-Hold Power Off</li>
+            <li>Deep Sleep Standby</li>
+          </ul>
+        </div>
+        <div class="omp-item">
+          <p class="omp-title">Status LED</p>
+          <ul class="module-list">
+            <li>Blue: Bluetooth Connected</li>
+            <li>Green: USB Connected</li>
+            <li>White: Pairing</li>
+            <li>Red: Low Battery</li>
+          </ul>
+        </div>
+        <div class="omp-item">
+          <p class="omp-title">Board</p>
+          <ul class="module-list">
+            <li>2-Layer PCB, ~40 × 40 mm</li>
+            <li>0603 / 0805 Passives</li>
+            <li>Large Test Pads</li>
+            <li>Full Silkscreen Labels</li>
+            <li>UART Debug Header</li>
+          </ul>
+        </div>
+        <div class="omp-item">
+          <p class="omp-title">Open Files</p>
+          <ul class="module-list">
+            <li>KiCad Schematic & Layout</li>
+            <li>Full BOM</li>
+            <li>Firmware Source</li>
+            <li>Design Rationale & Errata</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section surface">
+    <div class="section-inner">
+      <div class="about-body">
+        <div>
+          <p class="section-label">SDK</p>
+          <p class="lead">The whole device is an API.</p>
+          <div class="detail">
+            <p>The BLE UART channel is a documented serial protocol, and a small Python library wraps it. Stream
+              letters as they are keyed or adjust decode speed from a script. It is the same interface the companion
+              app uses, open to everyone.</p>
+            <p>Hardware extends the same way: a six-pin header exposes power, two GPIOs, and a UART, so displays, a
+              real telegraph key, a LoRa radio, or a sounder attach without touching the main board.</p>
+          </div>
+        </div>
+        <div>
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-lang">Python</span>
+              <div class="code-dots"><span></span><span></span><span></span></div>
+            </div>
+            <pre><span class="kw">import</span> <span class="c">telegraph</span>
+
+<span class="comment"># same key over USB serial or BLE</span>
+<span class="c">key</span> = <span class="c">telegraph</span>.<span class="fn">connect</span>()
+<span class="c">key</span>.<span class="fn">set_wpm</span>(<span class="c">18</span>)
+
+<span class="comment"># letters as they are keyed</span>
+<span class="kw">for</span> <span class="c">letter</span> <span class="kw">in</span> <span class="c">key</span>.<span class="fn">listen</span>():
+    <span class="fn">print</span>(<span class="c">letter</span>)</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="section-inner">
+      <p class="section-label">Roadmap</p>
+      <h2
+        style="font-family: var(--font-display); font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 300; margin-bottom: 48px;">
+        One key. Built in stages.</h2>
+      <div class="roadmap-grid">
+        <div class="roadmap-item">
+          <p class="roadmap-phase">Phase 1</p>
+          <h3>Prototype Hardware</h3>
+          <p>Schematic and 2-layer board in KiCad, professional design review, first hand-assembled units and
+            bring-up.</p>
+          <span class="status">In Development</span>
+        </div>
+        <div class="roadmap-item">
+          <p class="roadmap-phase">Phase 2</p>
+          <h3>Firmware Core</h3>
+          <p>Morse decoder, USB and Bluetooth HID, pairing flow, LED states, and power management. Adjustable keying
+            speed.</p>
+          <span class="status">Planned</span>
+        </div>
+        <div class="roadmap-item">
+          <p class="roadmap-phase">Phase 3</p>
+          <h3>Design Files Published</h3>
+          <p>KiCad sources, BOM, firmware, and the full design rationale, including the mistakes and what fixed
+            them.</p>
+          <span class="status">Planned</span>
+        </div>
+        <div class="roadmap-item">
+          <p class="roadmap-phase">Phase 4</p>
+          <h3>Companion App</h3>
+          <p>Settings, decode speed, and firmware updates over the BLE UART channel. The device stays fully usable
+            without it.</p>
+          <span class="status">Research</span>
+        </div>
+        <div class="roadmap-item">
+          <p class="roadmap-phase">Phase 5</p>
+          <h3>Accessories</h3>
+          <p>OLED display, rotary encoder, real telegraph key jack, and mechanical sounder on the expansion
+            header.</p>
+          <span class="status">Research</span>
+        </div>
+        <div class="roadmap-item">
+          <p class="roadmap-phase">Phase 6</p>
+          <h3>Production Run</h3>
+          <p>Assembled units in an enclosure, built from the published files. Anyone can manufacture the same board
+            without restriction.</p>
+          <span class="status">Research</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section surface">
+    <div class="section-inner" style="text-align: center; max-width: 640px; margin: 0 auto;">
+      <p class="section-label">Get Involved</p>
+      <h2
+        style="font-family: var(--font-display); font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 300; margin-bottom: 16px;">
+        One button. Everything published.</h2>
+      <p style="font-size: 0.875rem; font-weight: 300; color: var(--muted); line-height: 1.8; margin-bottom: 40px;">Open
+        Telegraph is in active design. Follow the build log, review the schematic, or propose an accessory for the
+        expansion header.</p>
+      <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+        <a href="/open-source.html" class="btn-primary">View Repository</a>
+        <a href="/blog.html" class="btn-secondary">Build Log</a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

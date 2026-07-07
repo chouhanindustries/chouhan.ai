@@ -19,7 +19,9 @@ Verify changes with `npm run build` and by loading pages in a browser.
 
 ## Architecture
 
-Seven pages in `src/pages/*.astro`, one per URL. `astro.config.mjs` sets `build.format: 'file'` so `products.astro` → `/products.html` (URLs must stay stable — the site is live with these paths) and `compressHTML: false` for readable output.
+Pages live in `src/pages/`, one `.astro` file per URL. `astro.config.mjs` sets `build.format: 'file'` so `products.astro` → `/products.html` (URLs must stay stable — the site is live with these paths) and `compressHTML: false` for readable output.
+
+Product detail pages live in `src/pages/products/` (e.g. `products/open-telegraph.astro` → `/products/open-telegraph.html`); `products.astro` is the index, with the product list as a frontmatter array. Add a product by adding an array entry and a detail page.
 
 **Shared chrome lives in one place:**
 
@@ -29,7 +31,7 @@ Seven pages in `src/pages/*.astro`, one per URL. `astro.config.mjs` sets `build.
 
 The inline analytics scripts in BaseLayout use `is:inline` — keep that directive or Astro will bundle/transform them.
 
-**Static assets are in `public/`** and served from the site root (e.g. `public/assets/css/style.css` → `/assets/css/style.css`). Pages reference them with relative paths (`assets/...`), which works because all pages are at the root level.
+**Static assets are in `public/`** and served from the site root (e.g. `public/assets/css/style.css` → `/assets/css/style.css`). Shared chrome (BaseLayout, Nav, Footer) uses root-relative paths (`/assets/...`, `/products.html`) so it works from nested pages like `/products/*`; root-level pages may still use relative paths in their own bodies.
 
 - `public/assets/css/style.css` — single stylesheet for the whole site. Design tokens (colors, fonts, spacing) live in `:root` variables at the top: dark theme (`--bg: #09090B`), gold accent (`--gold: #C9A84C`), Libre Baskerville for display headings, IBM Plex Sans for body. Sections are organized with `/* ── Name ── */` banner comments; add new component styles under an appropriate banner.
 - `public/assets/js/script.js` — single script for all pages: navbar solidify-on-scroll, hamburger/mobile menu, and the contact form (builds a `mailto:` to `chouhanindustries@outlook.com` — there is no backend).

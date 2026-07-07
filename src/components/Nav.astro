@@ -7,19 +7,20 @@ interface Props {
 
 const { home = false } = Astro.props;
 
+// Root-relative hrefs so the chrome works from nested pages (e.g. /products/*).
 const links = [
-  { href: 'products.html', label: 'Products' },
-  { href: 'open-source.html', label: 'Open Source' },
-  { href: 'about.html', label: 'About' },
-  { href: 'blog.html', label: 'Blog' },
-  { href: 'careers.html', label: 'Careers' },
-  { href: 'contact.html', label: 'Contact' },
+  { href: '/products.html', label: 'Products' },
+  { href: '/open-source.html', label: 'Open Source' },
+  { href: '/about.html', label: 'About' },
+  { href: '/blog.html', label: 'Blog' },
+  { href: '/careers.html', label: 'Careers' },
+  { href: '/contact.html', label: 'Contact' },
 ];
 ---
 
 <nav id="navbar" class:list={[{ scrolled: !home }]}>
   <div class="nav-inner">
-    <a href={home ? '#hero' : 'index.html'} class="wordmark"><img src="assets/favicons/logo-icon.svg" alt="Chouhan Industries"
+    <a href={home ? '#hero' : '/index.html'} class="wordmark"><img src="/assets/favicons/logo-icon.svg" alt="Chouhan Industries"
         width="259" height="251" class="nav-logo">CHOUHAN INDUSTRIES</a>
     <ul class="nav-links">
       {links.map((link) => (

@@ -1,5 +1,24 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Product index. Each entry links to a detail page in src/pages/products/;
+// add a product by adding an entry here and a page there.
+const products = [
+  {
+    href: 'products/open-media-platform.html',
+    status: 'In Development',
+    name: 'Open Media Platform',
+    blurb:
+      'A fully open, modular media computing platform. Every input, output, codec, and expansion module is replaceable and documented. Built for any medium, any format, any use case.',
+  },
+  {
+    href: 'products/open-telegraph.html',
+    status: 'In Development',
+    name: 'Open Telegraph',
+    blurb:
+      'A pocket-size Morse key. One button, one RGB LED, an ESP32-S3, and a battery. Plug it in over USB-C or pair it over Bluetooth and it types Morse into any device as a standard keyboard.',
+  },
+];
 ---
 
 <BaseLayout
@@ -21,282 +40,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <section class="page-section">
     <div class="section-inner">
       <div class="product-grid">
-        <a href="#omp" class="product-card" style="display: block; text-decoration: none;">
-          <span class="status">In Development</span>
-          <h2>Open Media Platform</h2>
-          <p>A fully open, modular media computing platform. Every input, output, codec, and expansion module is
-            replaceable and documented. Built for any medium, any format, any use case.</p>
-          <p
-            style="margin-top: 20px; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold);">
-            Learn More</p>
-        </a>
-        <div class="product-card"
-          style="display: flex; flex-direction: column; justify-content: center; align-items: flex-start; border-left: none;">
-          <p style="font-size: 0.75rem; font-weight: 300; color: var(--subtle); line-height: 1.8;">More products to be
-            announced. All design decisions are made in public. Follow the <a href="blog.html"
-              style="color: var(--gold);">build log</a> or check the <a href="open-source.html"
-              style="color: var(--gold);">repository</a> for progress.</p>
+        {products.map((product) => (
+          <a href={product.href} class="product-card" style="display: block; text-decoration: none;">
+            <span class="status">{product.status}</span>
+            <h2>{product.name}</h2>
+            <p>{product.blurb}</p>
+            <p
+              style="margin-top: 20px; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold);">
+              Learn More</p>
+          </a>
+        ))}
+        <div class="product-card product-note">
+          <p>More products to be announced. All design decisions are made in public. Follow the
+            <a href="blog.html">build log</a> or check the <a href="open-source.html">repository</a> for progress.</p>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="page-section surface" id="omp">
-    <div class="section-inner">
-      <p class="eyebrow">OMP</p>
-      <h2
-        style="font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 300; margin-bottom: 16px;">
-        Open Media Platform</h2>
-      <div class="gold-rule" style="margin-bottom: 40px;"></div>
-      <div class="about-body">
-        <div>
-          <p class="section-label">The Problem</p>
-          <p class="lead">Every media device today is a closed system.</p>
-          <div class="detail">
-            <p>Closed firmware. Closed DSP. Closed hardware. When the manufacturer stops caring, the product dies. You
-              own the object but not the platform.</p>
-            <p>The open-source world solved this for computers, for routers, for cameras. Media computing has been left
-              behind.</p>
-          </div>
-        </div>
-        <div>
-          <p class="section-label">The Platform</p>
-          <p class="lead">A modular core with an open expansion standard.</p>
-          <div class="detail">
-            <p>OMP is a hardware platform where every layer is open. The core board handles computing. Expansion modules
-              handle everything else. Software never talks directly to hardware.</p>
-            <p>Think Raspberry Pi meets Hi-Fi meets Framework Laptop. Any medium is a module. Any application runs the
-              same API.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="page-section">
-    <div class="section-inner">
-      <p class="section-label">Architecture</p>
-      <h2
-        style="font-family: var(--font-display); font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 300; margin-bottom: 48px;">
-        One platform. Every medium.</h2>
-      <div class="stack-diagram">
-        <div class="stack-layer">
-          <p class="stack-label">Applications</p>
-          <div class="stack-chips">
-            <span class="stack-chip">Music Player</span>
-            <span class="stack-chip">Video Player</span>
-            <span class="stack-chip">Recorder</span>
-            <span class="stack-chip">Radio</span>
-            <span class="stack-chip">Podcast</span>
-            <span class="stack-chip">Backup</span>
-            <span class="stack-chip">Emulator</span>
-            <span class="stack-chip">Streaming</span>
-          </div>
-        </div>
-        <div class="stack-layer stack-api">
-          <p class="stack-label">Open Media API</p>
-          <div class="stack-chips">
-            <span class="stack-chip">Codec Layer</span>
-            <span class="stack-chip">DSP Layer</span>
-            <span class="stack-chip">Filesystem Layer</span>
-            <span class="stack-chip">Device Layer</span>
-          </div>
-        </div>
-        <div class="stack-layer">
-          <p class="stack-label">Hardware Core</p>
-          <div class="stack-chips">
-            <span class="stack-chip">CPU</span>
-            <span class="stack-chip">Memory</span>
-            <span class="stack-chip">USB</span>
-            <span class="stack-chip">PCIe</span>
-            <span class="stack-chip">GPIO</span>
-            <span class="stack-chip">Power</span>
-          </div>
-        </div>
-        <div class="stack-layer stack-modules">
-          <p class="stack-label">Expansion Modules</p>
-          <div class="stack-chips">
-            <span class="stack-chip">Cassette</span>
-            <span class="stack-chip">CD / DVD</span>
-            <span class="stack-chip">Vinyl</span>
-            <span class="stack-chip">DAC</span>
-            <span class="stack-chip">ADC</span>
-            <span class="stack-chip">Radio</span>
-            <span class="stack-chip">Bluetooth</span>
-            <span class="stack-chip">Storage</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="page-section">
-    <div class="section-inner">
-      <p class="section-label">Expansion Modules</p>
-      <h2
-        style="font-family: var(--font-display); font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 300; margin-bottom: 48px;">
-        Every medium. One connector.</h2>
-      <div class="omp-grid">
-        <div class="omp-item">
-          <p class="omp-title">Physical Media</p>
-          <ul class="module-list">
-            <li>Analog Cassette</li>
-            <li>Digital Cassette</li>
-            <li>CD / DVD / Blu-ray</li>
-            <li>Vinyl (Phono Preamp)</li>
-            <li>MiniDisc</li>
-          </ul>
-        </div>
-        <div class="omp-item">
-          <p class="omp-title">Audio</p>
-          <ul class="module-list">
-            <li>High-Fidelity DAC</li>
-            <li>ADC / Recording</li>
-            <li>Tube Preamplifier</li>
-            <li>Class-D Amplifier</li>
-            <li>FM / DAB Radio</li>
-          </ul>
-        </div>
-        <div class="omp-item">
-          <p class="omp-title">Storage</p>
-          <ul class="module-list">
-            <li>SD Card</li>
-            <li>SSD / NVMe</li>
-            <li>USB Mass Storage</li>
-            <li>HDD</li>
-            <li>High-Density Tape</li>
-          </ul>
-        </div>
-        <div class="omp-item">
-          <p class="omp-title">Wireless</p>
-          <ul class="module-list">
-            <li>Wi-Fi</li>
-            <li>Bluetooth Audio</li>
-            <li>Zigbee</li>
-            <li>LoRa</li>
-          </ul>
-        </div>
-        <div class="omp-item">
-          <p class="omp-title">Outputs</p>
-          <ul class="module-list">
-            <li>RCA / XLR</li>
-            <li>HDMI</li>
-            <li>S/PDIF</li>
-            <li>Headphone Amplifier</li>
-            <li>USB Audio</li>
-          </ul>
-        </div>
-        <div class="omp-item">
-          <p class="omp-title">Inputs</p>
-          <ul class="module-list">
-            <li>Line In</li>
-            <li>Microphone</li>
-            <li>Instrument</li>
-            <li>Camera</li>
-            <li>Display</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="page-section surface">
-    <div class="section-inner">
-      <div class="about-body">
-        <div>
-          <p class="section-label">Software</p>
-          <p class="lead">No application talks directly to hardware.</p>
-          <div class="detail">
-            <p>The Open Media SDK provides a unified interface across every module. Python, Rust, C, and C++. The
-              hardware underneath is irrelevant to the application layer.</p>
-            <p>Write a music player once. Run it on cassette, SD, USB, Bluetooth, and CD without changing a line.</p>
-          </div>
-        </div>
-        <div>
-          <div class="code-block">
-            <div class="code-header">
-              <span class="code-lang">Python</span>
-              <div class="code-dots"><span></span><span></span><span></span></div>
-            </div>
-            <pre><span class="kw">import</span> <span class="c">openmedia</span>
-
-<span class="comment"># same API for SD, USB, DAC,</span>
-<span class="comment"># Bluetooth, CD, vinyl, radio</span>
-<span class="c">player</span> = <span class="c">openmedia</span>.<span class="fn">Player</span>(<span class="s">"casette0"</span>)
-<span class="c">player</span>.<span class="fn">play</span>()
-<span class="c">player</span>.<span class="fn">next</span>()
-<span class="c">player</span>.<span class="fn">record</span>()
-<span class="c">player</span>.<span class="fn">stop</span>()</pre>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="page-section">
-    <div class="section-inner">
-      <p class="section-label">Roadmap</p>
-      <h2
-        style="font-family: var(--font-display); font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 300; margin-bottom: 48px;">
-        One platform. Built in stages.</h2>
-      <div class="roadmap-grid">
-        <div class="roadmap-item">
-          <p class="roadmap-phase">Phase 1</p>
-          <h3>Core Platform</h3>
-          <p>Core board with USB, SD, Bluetooth, and DAC. Target price under Rs. 10,000. Entry point for developers and
-            early adopters.</p>
-          <span class="status">In Development</span>
-        </div>
-        <div class="roadmap-item">
-          <p class="roadmap-phase">Phase 2</p>
-          <h3>Open SDK & Expansion Standard</h3>
-          <p>Publish the Open Media SDK and connector specification. Third-party module development opens. The platform
-            becomes an ecosystem.</p>
-          <span class="status">Planned</span>
-        </div>
-        <div class="roadmap-item">
-          <p class="roadmap-phase">Phase 3</p>
-          <h3>First-Party Modules</h3>
-          <p>Audio DAC, ADC, physical media, and storage modules ship. Full schematics and fabrication files published
-            for each.</p>
-          <span class="status">Planned</span>
-        </div>
-        <div class="roadmap-item">
-          <p class="roadmap-phase">Phase 4</p>
-          <h3>Developer Ecosystem</h3>
-          <p>Community-built modules, third-party applications, and platform integrations. Open registry for modules and
-            software.</p>
-          <span class="status">Planned</span>
-        </div>
-        <div class="roadmap-item">
-          <p class="roadmap-phase">Phase 5</p>
-          <h3>Platform Standard</h3>
-          <p>Publish the complete OMP specification. Any manufacturer can build a fully compatible platform or module
-            without restriction.</p>
-          <span class="status">Research</span>
-        </div>
-        <div class="roadmap-item">
-          <p class="roadmap-phase">Phase 6</p>
-          <h3>Industrial & Archival</h3>
-          <p>Broadcast-grade I/O, high-density storage, and professional archival modules. The platform scales to
-            institutional use.</p>
-          <span class="status">Research</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="page-section surface">
-    <div class="section-inner" style="text-align: center; max-width: 640px; margin: 0 auto;">
-      <p class="section-label">Get Involved</p>
-      <h2
-        style="font-family: var(--font-display); font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 300; margin-bottom: 16px;">
-        The platform is open. The ecosystem is yours to build.</h2>
-      <p style="font-size: 0.875rem; font-weight: 300; color: var(--muted); line-height: 1.8; margin-bottom: 40px;">We
-        are in active design. Follow the build log, contribute to the specification, or propose a module.</p>
-      <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
-        <a href="open-source.html" class="btn-primary">View Repository</a>
-        <a href="blog.html" class="btn-secondary">Build Log</a>
       </div>
     </div>
   </section>

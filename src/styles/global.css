@@ -710,6 +710,21 @@ a.product-card:hover {
   line-height: 1.7;
 }
 
+.product-card.product-note {
+  grid-column: 1 / -1;
+  padding: 32px 40px;
+}
+
+.product-card.product-note p {
+  font-size: 0.75rem;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.product-card.product-note a {
+  color: var(--gold);
+}
+
 /* ── Open Source ─────────────────────────────────────────── */
 .os-grid {
   display: grid;
@@ -1043,6 +1058,12 @@ a.product-card:hover {
   background: var(--surface);
 }
 
+.stack-info {
+  min-width: 200px;
+  max-width: 200px;
+  flex-shrink: 0;
+}
+
 .stack-label {
   font-size: 0.6rem;
   font-weight: 500;
@@ -1051,6 +1072,18 @@ a.product-card:hover {
   color: var(--gold);
   min-width: 180px;
   flex-shrink: 0;
+}
+
+.stack-info .stack-label {
+  min-width: auto;
+  margin-bottom: 6px;
+}
+
+.stack-desc {
+  font-size: 0.72rem;
+  font-weight: 300;
+  color: var(--subtle);
+  line-height: 1.5;
 }
 
 .stack-chips {
@@ -1212,6 +1245,7 @@ a.product-card:hover {
   .roadmap-grid { grid-template-columns: 1fr; }
   .stack-layer { flex-direction: column; align-items: flex-start; gap: 12px; }
   .stack-label { min-width: auto; }
+  .stack-info { min-width: auto; max-width: none; }
 }
 
 /* ── Journal ─────────────────────────────────────────────── */

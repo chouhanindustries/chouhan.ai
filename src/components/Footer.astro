@@ -5,20 +5,21 @@ interface Props {
 
 const { home = false } = Astro.props;
 
+// Root-relative hrefs so the chrome works from nested pages (e.g. /products/*).
 const links = [
-  { href: 'products.html', label: 'Products' },
-  { href: 'open-source.html', label: 'Open Source' },
-  { href: 'about.html', label: 'About' },
-  { href: 'blog.html', label: 'Blog' },
-  { href: 'careers.html', label: 'Careers' },
-  { href: 'contact.html', label: 'Contact' },
+  { href: '/products.html', label: 'Products' },
+  { href: '/open-source.html', label: 'Open Source' },
+  { href: '/about.html', label: 'About' },
+  { href: '/blog.html', label: 'Blog' },
+  { href: '/careers.html', label: 'Careers' },
+  { href: '/contact.html', label: 'Contact' },
 ];
 ---
 
 <footer>
   <div class="footer-inner">
     <div class="footer-top">
-      <a href={home ? '#hero' : 'index.html'} class="footer-wordmark"><img src="assets/favicons/logo-icon.svg" alt="Chouhan Industries"
+      <a href={home ? '#hero' : '/index.html'} class="footer-wordmark"><img src="/assets/favicons/logo-icon.svg" alt="Chouhan Industries"
           width="259" height="251" loading="lazy" class="footer-logo">CHOUHAN INDUSTRIES</a>
       <nav class="footer-nav">
         {links.map((link) => (
