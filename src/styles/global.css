@@ -797,6 +797,13 @@ a.product-card:hover {
   align-items: start;
 }
 
+/* Let grid tracks shrink below their content's intrinsic width so wide
+   children (e.g. a .code-block with white-space: pre) scroll internally
+   instead of forcing horizontal page overflow. */
+.about-body > * {
+  min-width: 0;
+}
+
 .about-body .lead {
   font-family: var(--font-display);
   font-size: clamp(1.2rem, 2vw, 1.6rem);
@@ -1246,6 +1253,9 @@ a.product-card:hover {
   .stack-layer { flex-direction: column; align-items: flex-start; gap: 12px; }
   .stack-label { min-width: auto; }
   .stack-info { min-width: auto; max-width: none; }
+
+  /* Smaller code so more of each line fits before it needs to scroll */
+  .code-block pre { font-size: 0.72rem; padding: 24px 20px; }
 }
 
 /* ── Journal ─────────────────────────────────────────────── */
