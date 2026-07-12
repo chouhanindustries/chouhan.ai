@@ -3,6 +3,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 const posts = [
   {
+    date: 'Jul 2025',
+    tag: 'Build Log',
+    title: 'Building Open Hardware with Claude',
+    excerpt:
+      'Most people use Claude to write code. We use it to design open source hardware. A look at how Open Telegraph gets built with Claude Code open on the repo, reading datasheets, picking parts, and laying out the board.',
+    url: '/building-with-claude.html',
+  },
+  {
     date: 'Jun 2025',
     tag: 'Process',
     title: 'Why We Publish Tolerances Before Shipping',
@@ -44,16 +52,20 @@ const posts = [
   <section class="page-section">
     <div class="section-inner">
       <div class="journal-list">
-        {posts.map((post) => (
-          <div class="journal-item">
-            <span class="date">{post.date}</span>
-            <div>
-              <span class="tag">{post.tag}</span>
-              <h2>{post.title}</h2>
-              <p>{post.excerpt}</p>
-            </div>
-          </div>
-        ))}
+        {posts.map((post) => {
+          const Item = post.url ? 'a' : 'div';
+          return (
+            <Item class:list={['journal-item', { 'journal-link': post.url }]} href={post.url}>
+              <span class="date">{post.date}</span>
+              <div>
+                <span class="tag">{post.tag}</span>
+                <h2>{post.title}</h2>
+                <p>{post.excerpt}</p>
+                {post.url && <span class="journal-more">Read more &rarr;</span>}
+              </div>
+            </Item>
+          );
+        })}
       </div>
     </div>
   </section>

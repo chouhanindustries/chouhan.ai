@@ -19,6 +19,16 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     </div>
   </div>
 
+  <section class="page-section">
+    <div class="section-inner">
+      <figure class="article-figure" style="max-width: 860px; margin: 0 auto;">
+        <img src="/assets/images/pcb.png" alt="Open Telegraph board, 3D render" width="1552" height="1129"
+          loading="lazy" />
+        <figcaption>3D render of the 2-layer board</figcaption>
+      </figure>
+    </div>
+  </section>
+
   <section class="page-section surface" id="telegraph">
     <div class="section-inner">
       <div class="about-body">
@@ -264,6 +274,30 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   </section>
 
   <section class="page-section surface">
+    <div class="section-inner">
+      <div class="about-body">
+        <div>
+          <p class="section-label">Built with Claude</p>
+          <p class="lead">Designed with Claude Code open on the repo.</p>
+          <div class="detail">
+            <p>The KiCad schematic, the routing plan, and five design docs that have to stay in sync are all edited as
+              real files, with ERC and DRC checked through kicad-cli. Claude reads the datasheets, holds the
+              constraints, picks the parts, and writes down why each one is there.</p>
+            <p style="margin-top: 28px;"><a href="/building-with-claude.html" class="btn-primary">Read more</a></p>
+          </div>
+        </div>
+        <div>
+          <figure class="article-figure" style="margin: 0;">
+            <img src="/assets/images/routing.gif" alt="Routing the Open Telegraph board" width="800" height="640"
+              loading="lazy" />
+            <figcaption>Routing the board</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section">
     <div class="section-inner" style="text-align: center; max-width: 640px; margin: 0 auto;">
       <p class="section-label">Get Involved</p>
       <h2
@@ -273,7 +307,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         Telegraph is in active design. Follow the build log, review the schematic, or propose an accessory for the
         expansion header.</p>
       <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
-        <a href="/open-source.html" class="btn-primary">View Repository</a>
+        <a href="https://github.com/animesh-chouhan/open-telegraph" target="_blank" rel="noopener noreferrer"
+          class="btn-primary">View Repository</a>
         <a href="/blog.html" class="btn-secondary">Build Log</a>
       </div>
     </div>

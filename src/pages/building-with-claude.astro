@@ -1,0 +1,223 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Building Open Hardware with Claude | Chouhan Industries"
+  ogTitle="Building Open Hardware with Claude"
+  description="Most people use Claude to write code. At Chouhan Industries we use it to design open source hardware. How Open Telegraph, a pocket-size Morse key, gets built with Claude Code open on the repo. Submitted to India Builds with Claude."
+  url="https://chouhan.ai/building-with-claude.html"
+>
+
+  <div class="page-hero">
+    <div class="section-inner">
+      <p class="article-kicker">India Builds with Claude &middot; Razorpay &times; Anthropic &times; Peak XV</p>
+      <div style="max-width: 720px; margin: 0 auto; text-align: center;">
+        <h1 style="text-align: center;">Building Open Hardware with Claude</h1>
+        <p class="page-sub" style="margin: 0 auto;">Most people use Claude to write code. At Chouhan Industries we use it
+          to design open source hardware.</p>
+      </div>
+    </div>
+  </div>
+
+  <section class="page-section">
+    <div class="section-inner">
+      <div class="event-banner">
+        <span class="event-tag">Builder Showcase</span>
+        <span class="event-meta">A field note on how Open Telegraph is designed, with Claude Code open on the
+          repo editing the real KiCad files. Submitted to the Claude Builders Showcase in Bengaluru.</span>
+      </div>
+
+      <article class="article">
+        <p class="hook">Most Claude demos are software. <strong>This one is a circuit board.</strong></p>
+
+        <p>Open Telegraph is a pocket-size Morse key: an ESP32-S3, one button, one RGB LED, and a small battery. Plug
+          it in over USB-C or pair it over Bluetooth and it types Morse into any device as a normal keyboard. It's
+          fully open, down to the copper.</p>
+
+        <figure class="article-figure">
+          <img src="/assets/images/pcb.png" alt="Open Telegraph board, 3D render" width="1552" height="1129"
+            loading="lazy" />
+          <figcaption>Open Telegraph board, 3D render</figcaption>
+        </figure>
+
+        <p>We build it with Claude Code open on the repo, editing the real files:</p>
+
+        <ul>
+          <li>The KiCad schematic, one sheet per subsystem: USB input, charger and load-sharing, the 3.3 V rail, the
+            ESP32-S3 with its reset and boot circuit, the key, jack, LED and sidetone, battery and USB sensing, and
+            the headers</li>
+          <li>The 2-layer PCB layout: 40 by 40 mm, 0.2 mm track and space, a full antenna keepout, and a
+            bottom-layer ground pour</li>
+          <li>Five design docs that have to stay in sync: the specification, the bill of materials with orderable
+            part numbers, the ESP32-S3 pin assignment, the per-subsystem schematic values, and the placement and
+            routing plan</li>
+          <li>ERC on the schematic and DRC on the board, run through <code>kicad-cli</code></li>
+        </ul>
+
+        <h2>The one number the whole board is built around</h2>
+        <p>There is no power switch. "Off" is the ESP32-S3 in deep sleep, and the whole board has to live inside about
+          25 µA while it's there. That single number decides most of the parts on the board.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Mode</th><th>Draw</th><th>Endurance (250 mAh cell)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Deep sleep ("off")</td><td>~25 µA</td><td>~14 months</td></tr>
+              <tr><td>Bluetooth connected, keying</td><td>~25 mA avg</td><td>~10 hours</td></tr>
+              <tr><td>Charge from empty</td><td>100 mA</td><td>~3 hours</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>Fourteen months of standby from a battery smaller than a stick of gum only works if nothing leaks. So a
+          resistor that would draw 33 µA is not a rounding error, it's a bug. That framing is what makes the next few
+          decisions non-obvious.</p>
+
+        <h2>Why it's actually useful</h2>
+        <p>The hard part of hardware isn't drawing one circuit. It's keeping everything consistent when a decision
+          changes, and picking parts that satisfy every constraint at once, not just the obvious one. A few real
+          examples from this board.</p>
+
+        <h3>No power switch</h3>
+        <p>A real switch gives a true zero-draw "off," but it's a moving part, a hole in the enclosure, and another
+          gesture on a one-button device. We talked it through and dropped it: "off" is just deep sleep, held on the
+          key. The price is the ~25 µA budget above, and at that draw a 250 mAh cell still idles for over a year.</p>
+
+        <h3>The regulator</h3>
+        <p>The 3.3 V rail has to hold across a 3.0 to 4.75 V input, source a few hundred mA on radio bursts, and draw
+          under ~8 µA asleep. That last one kills most parts: cheap LDOs sit at 60 to 100 µA quiescent, tripling the
+          sleep budget on their own. We use the Torex XC6220B331 (~8 µA, 1.6 to 6.0 V in), with the reason written
+          next to it so nobody swaps in something cheaper.</p>
+
+        <h3>A resistor that must not exist</h3>
+        <p>A straight key's mono plug grounds the jack's ring the whole time it's in, so a normal pullup on the dah pin
+          (KEY_DAH, GPIO7) would leak ~33 µA forever and blow the 25 µA budget. So it gets no external pullup: firmware
+          uses the ESP32-S3's internal one and releases it before sleep. Picking the part meant proving a resistor
+          shouldn't be there, because a missing pullup looks like a mistake.</p>
+
+        <h3>Reuse over new parts</h3>
+        <p>Both jack lines need ESD protection, the key cable is an antenna next to a live radio. Instead of a new
+          part, we reused the same USBLC6-2SC6 already on the USB lines (U4 becomes U5), its VBUS pin tied to 3.3 V so
+          its diodes stay reverse-biased and add nothing to the sleep budget. One fewer BOM line.</p>
+
+        <h3>The strapping-pin trap</h3>
+        <p>The key is deliberately off GPIO0, a boot-strapping pin: sitting there, holding the key during a reset would
+          drop the board into the ROM bootloader. It's on GPIO4 instead, RTC-capable, so it still wakes from deep
+          sleep, and GPIO0 stays clean. Catching this means reading the module's strapping table before assigning a
+          pin.</p>
+
+        <h3>Placement that respects physics</h3>
+        <p>No copper anywhere near the module's antenna, full keepout on any layer, out past the board edge. The ESD
+          arrays sit right at the connectors they protect, because a clamp at the far end of a trace protects nothing.
+          The button is dead center, because the button is the product.</p>
+
+        <figure class="article-figure">
+          <img src="/assets/images/routing.gif" alt="Routing the board" width="800" height="640" loading="lazy" />
+          <figcaption>Routing the board</figcaption>
+        </figure>
+
+        <p>None of this is autocomplete. It's reading datasheets, holding a handful of constraints in your head at
+          once, and writing down the reasoning so the next change doesn't quietly undo it.</p>
+
+        <h2>How the workflow works</h2>
+        <p>It's a loop, and it looks a lot like pair-programming, except the codebase is a circuit board.</p>
+
+        <ol class="workflow">
+          <li><strong>Start from the docs.</strong> Every decision lives in one of five markdown files, so Claude
+            reads those first and knows the whole design, not just the part in front of it.</li>
+          <li><strong>Talk through the change.</strong> We describe what we want ("add an external key jack", "cut the
+            sleep current"). Claude proposes the parts and circuit, and we push back until the reasoning holds up.</li>
+          <li><strong>Edit the real files.</strong> Claude writes the changes straight into the KiCad schematic and
+            the design docs, using the same part names and net names everywhere so nothing drifts.</li>
+          <li><strong>Propagate.</strong> Change one value, like the charge current or a pin, and Claude carries it
+            across every doc and the schematic that references it. This is the boring, easy-to-get-wrong step it's
+            best at.</li>
+          <li><strong>Check the work.</strong> Claude reads the errors back and fixes them. Nothing is "done" until
+            the tools agree.</li>
+          <li><strong>Write down why.</strong> Every real decision gets a one-line reason next to it, so the next
+            change doesn't quietly undo it.</li>
+        </ol>
+
+        <p>The check in step five is two commands, run the same way every time. Claude runs them, reads the report, and
+          fixes what they flag:</p>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">Shell</span>
+            <div class="code-dots"><span></span><span></span><span></span></div>
+          </div>
+          <pre><span class="comment"># validate the schematic (parses the full sheet hierarchy)</span>
+kicad-cli sch erc --exit-code-violations -o erc.rpt \
+  hardware/open-telegraph.kicad_sch
+
+<span class="comment"># validate the board against the design rules</span>
+kicad-cli pcb drc --exit-code-violations -o drc.rpt \
+  hardware/open-telegraph.kicad_pcb</pre>
+        </div>
+
+        <p>Then repeat. The docs are the memory, the KiCad files are the output, and the <code>kicad-cli</code> checks
+          are the safety net.</p>
+
+        <div class="demo-box">
+          <p class="demo-box-label">What this looks like live</p>
+          <p>Claude Code open on the real repo. Say "cut the sleep current" or "move the key off GPIO0" and watch it
+            propagate the change across all five docs and the schematic, keeping every net name and part number in
+            sync, then run <code>kicad-cli</code> ERC and DRC and read the violations back. A circuit board,
+            redesigned in front of you, in one prompt.</p>
+        </div>
+
+        <h2>Where Claude fits</h2>
+        <p>Not as an autorouter, and not as the engineer of record. As the reasoning layer over the whole design at
+          once:</p>
+        <ul>
+          <li><strong>Consistency.</strong> Change one value and it propagates across every doc, the BOM, and the
+            schematic. No drift.</li>
+          <li><strong>Part choice.</strong> Hold every constraint at once, input range, current, quiescent draw,
+            package, sourceable, not just the obvious one.</li>
+          <li><strong>Traps.</strong> Catch the datasheet rules, strapping pins, ADC limits, leaking pullups, before
+            they ship.</li>
+          <li><strong>Rationale.</strong> Write the one-line why next to each decision, so the next change doesn't
+            undo it.</li>
+        </ul>
+        <p>The bench work, metering rails, routing copper, bring-up, stays human.</p>
+
+        <h2>The point</h2>
+        <p>The Morse key is just the proof. The product is the workflow: Claude as a co-designer that holds the
+          constraints, picks the parts, lays out the board, and checks its own work, so one person can take a real
+          product from idea to manufacturable files in days, not months. That's the thing worth shipping, a faster way
+          to design and make hardware, and the board is just what it made first. It's all public (CERN-OHL-S v2.0), so
+          anyone can run the same loop.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="section-inner">
+      <p class="section-label" style="text-align: center;">The Event</p>
+      <div class="tweet-embed">
+        <blockquote class="twitter-tweet" data-theme="dark"><p lang="en" dir="ltr">Calling all AI builders to Bangalore 👋<br><br>We're teaming up with <a href="https://x.com/AnthropicAI?ref_src=twsrc%5Etfw">@AnthropicAI</a> and <a href="https://x.com/peakxvpartners?ref_src=twsrc%5Etfw">@peakxvpartners</a> for "India Builds with Claude", an evening dedicated to people shipping real AI products.<br><br>Build. Demo. Learn.<br><br>🏆 $10K in Claude API credits for the Top 3 demos<br>🎙️ 1:1 with… <a href="https://t.co/M8ufEhkDVx">pic.twitter.com/M8ufEhkDVx</a></p>&mdash; Razorpay (@Razorpay) <a href="https://x.com/Razorpay/status/2074817515381997786?ref_src=twsrc%5Etfw">July 8, 2026</a></blockquote>
+      </div>
+    </div>
+  </section>
+  <script is:inline async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
+
+  <section class="page-section surface">
+    <div class="section-inner" style="text-align: center; max-width: 640px; margin: 0 auto;">
+      <p class="section-label">See the Build</p>
+      <h2
+        style="font-family: var(--font-display); font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 300; margin-bottom: 16px;">
+        One button. Everything published.</h2>
+      <p style="font-size: 0.875rem; font-weight: 300; color: var(--muted); line-height: 1.8; margin-bottom: 40px;">Open
+        Telegraph is the board this workflow is building. Read the full design, or browse the open files it produces.</p>
+      <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+        <a href="/products/open-telegraph.html" class="btn-primary">Open Telegraph</a>
+        <a href="https://github.com/animesh-chouhan/open-telegraph" target="_blank" rel="noopener noreferrer"
+          class="btn-secondary">View Repository</a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
