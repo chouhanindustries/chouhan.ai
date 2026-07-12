@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
+import pcbRender from '../../assets/pcb.png';
 ---
 
 <BaseLayout
@@ -22,8 +24,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   <section class="page-section">
     <div class="section-inner">
       <figure class="article-figure" style="max-width: 860px; margin: 0 auto;">
-        <img src="/assets/images/pcb.png" alt="Open Telegraph board, 3D render" width="1552" height="1129"
-          loading="lazy" />
+        <Image src={pcbRender} alt="Open Telegraph board, 3D render" width={860} densities={[1, 2]} loading="lazy" />
         <figcaption>3D render of the 2-layer board</figcaption>
       </figure>
     </div>
@@ -289,7 +290,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         <div>
           <figure class="article-figure" style="margin: 0;">
             <img src="/assets/images/routing.gif" alt="Routing the Open Telegraph board" width="800" height="640"
-              loading="lazy" />
+              loading="lazy" decoding="async" />
             <figcaption>Routing the board</figcaption>
           </figure>
         </div>

@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
+import pcbRender from '../assets/pcb.png';
 ---
 
 <BaseLayout
@@ -36,8 +38,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           fully open, down to the copper.</p>
 
         <figure class="article-figure">
-          <img src="/assets/images/pcb.png" alt="Open Telegraph board, 3D render" width="1552" height="1129"
-            loading="lazy" />
+          <Image src={pcbRender} alt="Open Telegraph board, 3D render" width={860} densities={[1, 2]} loading="lazy" />
           <figcaption>Open Telegraph board, 3D render</figcaption>
         </figure>
 
@@ -115,7 +116,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           The button is dead center, because the button is the product.</p>
 
         <figure class="article-figure">
-          <img src="/assets/images/routing.gif" alt="Routing the board" width="800" height="640" loading="lazy" />
+          <img src="/assets/images/routing.gif" alt="Routing the board" width="800" height="640" loading="lazy"
+            decoding="async" />
           <figcaption>Routing the board</figcaption>
         </figure>
 
@@ -198,11 +200,12 @@ kicad-cli pcb drc --exit-code-violations -o drc.rpt \
     <div class="section-inner">
       <p class="section-label" style="text-align: center;">The Event</p>
       <div class="tweet-embed">
-        <blockquote class="twitter-tweet" data-theme="dark"><p lang="en" dir="ltr">Calling all AI builders to Bangalore 👋<br><br>We're teaming up with <a href="https://x.com/AnthropicAI?ref_src=twsrc%5Etfw">@AnthropicAI</a> and <a href="https://x.com/peakxvpartners?ref_src=twsrc%5Etfw">@peakxvpartners</a> for "India Builds with Claude", an evening dedicated to people shipping real AI products.<br><br>Build. Demo. Learn.<br><br>🏆 $10K in Claude API credits for the Top 3 demos<br>🎙️ 1:1 with… <a href="https://t.co/M8ufEhkDVx">pic.twitter.com/M8ufEhkDVx</a></p>&mdash; Razorpay (@Razorpay) <a href="https://x.com/Razorpay/status/2074817515381997786?ref_src=twsrc%5Etfw">July 8, 2026</a></blockquote>
+        <iframe class="tweet-frame"
+          src="https://platform.twitter.com/embed/Tweet.html?id=2074817515381997786&theme=dark&dnt=true"
+          title="Razorpay's post announcing India Builds with Claude" loading="lazy" scrolling="no"></iframe>
       </div>
     </div>
   </section>
-  <script is:inline async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
 
   <section class="page-section surface">
     <div class="section-inner" style="text-align: center; max-width: 640px; margin: 0 auto;">

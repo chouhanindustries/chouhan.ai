@@ -1352,9 +1352,11 @@ a.product-card:hover {
   justify-content: center;
 }
 
-.tweet-embed .twitter-tweet {
-  margin-left: auto;
-  margin-right: auto;
+.tweet-frame {
+  width: 100%;
+  max-width: 550px;
+  height: 700px;
+  border: 0;
 }
 
 /* ── Article / Essay ─────────────────────────────────────── */
