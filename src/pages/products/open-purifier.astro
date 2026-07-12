@@ -26,11 +26,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
           <p class="section-label">The Problem</p>
           <p class="lead">Your filter is a black box, and so is your water.</p>
           <div class="detail">
-            <p>Cartridges are proprietary and sealed. Some carry a chip so the unit refuses any filter but the
-              manufacturer's own. You cannot inspect the media, substitute it, or refill it, and the day the company
+            <p>Cartridges are proprietary and sealed. Some carry a chip so the unit <em>refuses any filter but the
+              manufacturer's own</em>. You cannot inspect the media, substitute it, or refill it, and the day the company
               stops selling the cartridge, the whole appliance is landfill.</p>
-            <p>Worse, you never learn what the filter actually did. The sensors, if there are any, report a green light
-              and nothing else. You are asked to trust a closed box with the one thing you drink every day.</p>
+            <p>Worse, you <em>never learn what the filter actually did</em>. The sensors, if there are any, report a green
+              light and nothing else. You are asked to trust a closed box with the one thing you drink every day.</p>
           </div>
         </div>
         <div>
@@ -39,10 +39,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
           <div class="detail">
             <p>Open Purifier separates the water from everything around it. Stages are swappable modules on a standard
               housing. Choose sediment, carbon, reverse osmosis, ultrafiltration, and UV in the order your water needs.
-              Every membrane and cartridge is documented and refillable, and third-party media drops straight in.</p>
-            <p>A common monitoring core sits across the stack and reads the water before and after each stage. It tells
-              you your TDS, turbidity, and pH in and out, tracks how much life each filter has left, and serves all of
-              it to your network. The green light becomes a number you can check.</p>
+              Every membrane and cartridge is <em>documented and refillable</em>, and third-party media drops straight
+              in.</p>
+            <p>Every part comes apart with a common tool. Cartridges, pump, valves, and sensors are all
+              <em>user-serviceable</em>, and the service manual and parts list ship with the unit. You maintain it
+              yourself, for as long as you want it.</p>
+            <p>A common monitoring core sits across the stack and reads the water <em>before and after each stage</em>.
+              It tells you your TDS, turbidity, and pH in and out, tracks how much life each filter has left, and serves
+              all of it to your network. The green light becomes a number you can check.</p>
           </div>
         </div>
       </div>
@@ -139,21 +143,21 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
           </ul>
         </div>
         <div class="omp-item">
-          <p class="omp-title">Membrane &amp; Cartridge</p>
+          <p class="omp-title">Cartridge &amp; Service</p>
           <ul class="module-list">
             <li>Standard Housing</li>
             <li>Refillable Cartridge</li>
             <li>Third-Party Media</li>
-            <li>Remineralizer</li>
+            <li>Tool-Free Service</li>
             <li>No DRM</li>
           </ul>
         </div>
         <div class="omp-item">
           <p class="omp-title">Dispense</p>
           <ul class="module-list">
-            <li>Drinking Tap</li>
-            <li>Chilled</li>
+            <li>Cold</li>
             <li>Hot</li>
+            <li>Exact Temperature (set point)</li>
             <li>Sparkling</li>
             <li>Storage Tank</li>
           </ul>
@@ -215,6 +219,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 <span class="comment"># how much life is left in each stage?</span>
 <span class="kw">for</span> <span class="c">stage</span> <span class="kw">in</span> <span class="c">unit</span>.<span class="fn">filters</span>():
     <span class="fn">print</span>(<span class="c">stage</span>.<span class="c">name</span>, <span class="c">stage</span>.<span class="c">life</span>)  <span class="comment"># "carbon", 0.63</span>
+
+<span class="comment"># dispense at an exact temperature</span>
+<span class="c">unit</span>.<span class="fn">dispense</span>(<span class="c">ml</span>=<span class="s">500</span>, <span class="c">temp_c</span>=<span class="s">85</span>)
 
 <span class="comment"># flush the membrane on demand</span>
 <span class="c">unit</span>.<span class="fn">flush</span>()</pre>
