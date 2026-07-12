@@ -1352,11 +1352,9 @@ a.product-card:hover {
   justify-content: center;
 }
 
-.tweet-frame {
-  width: 100%;
-  max-width: 550px;
-  height: 700px;
-  border: 0;
+.tweet-embed .twitter-tweet {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* ── Article / Essay ─────────────────────────────────────── */
@@ -1528,6 +1526,71 @@ a.product-card:hover {
 .article tbody td:first-child {
   color: var(--text);
   white-space: nowrap;
+}
+
+/* On narrow screens the table stacks into cards instead of scrolling sideways */
+@media (max-width: 600px) {
+  .article .table-wrap {
+    overflow-x: visible;
+    border: 0;
+  }
+
+  .article table {
+    min-width: 0;
+    display: block;
+    font-size: 0.9rem;
+  }
+
+  .article thead {
+    display: none;
+  }
+
+  .article tbody,
+  .article tbody tr,
+  .article tbody td {
+    display: block;
+    width: 100%;
+  }
+
+  .article tbody tr {
+    border: 1px solid var(--border);
+    margin-bottom: 12px;
+  }
+
+  .article tbody tr:last-child {
+    margin-bottom: 0;
+  }
+
+  .article tbody td {
+    padding: 10px 16px;
+    border-bottom: none;
+  }
+
+  .article tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .article tbody td:first-child {
+    background: var(--surface);
+    font-weight: 500;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .article tbody td[data-label] {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+  }
+
+  .article tbody td[data-label]::before {
+    content: attr(data-label);
+    color: var(--gold);
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
 }
 
 /* Numbered workflow steps */

@@ -66,9 +66,9 @@ import pcbRender from '../assets/pcb.png';
               <tr><th>Mode</th><th>Draw</th><th>Endurance (250 mAh cell)</th></tr>
             </thead>
             <tbody>
-              <tr><td>Deep sleep ("off")</td><td>~25 µA</td><td>~14 months</td></tr>
-              <tr><td>Bluetooth connected, keying</td><td>~25 mA avg</td><td>~10 hours</td></tr>
-              <tr><td>Charge from empty</td><td>100 mA</td><td>~3 hours</td></tr>
+              <tr><td>Deep sleep ("off")</td><td data-label="Draw">~25 µA</td><td data-label="Endurance">~14 months</td></tr>
+              <tr><td>Bluetooth connected, keying</td><td data-label="Draw">~25 mA avg</td><td data-label="Endurance">~10 hours</td></tr>
+              <tr><td>Charge from empty</td><td data-label="Draw">100 mA</td><td data-label="Endurance">~3 hours</td></tr>
             </tbody>
           </table>
         </div>
@@ -200,12 +200,11 @@ kicad-cli pcb drc --exit-code-violations -o drc.rpt \
     <div class="section-inner">
       <p class="section-label" style="text-align: center;">The Event</p>
       <div class="tweet-embed">
-        <iframe class="tweet-frame"
-          src="https://platform.twitter.com/embed/Tweet.html?id=2074817515381997786&theme=dark&dnt=true"
-          title="Razorpay's post announcing India Builds with Claude" loading="lazy" scrolling="no"></iframe>
+        <blockquote class="twitter-tweet" data-theme="dark"><p lang="en" dir="ltr">Calling all AI builders to Bangalore 👋<br><br>We're teaming up with <a href="https://x.com/AnthropicAI?ref_src=twsrc%5Etfw">@AnthropicAI</a> and <a href="https://x.com/peakxvpartners?ref_src=twsrc%5Etfw">@peakxvpartners</a> for "India Builds with Claude", an evening dedicated to people shipping real AI products.<br><br>Build. Demo. Learn.<br><br>🏆 $10K in Claude API credits for the Top 3 demos<br>🎙️ 1:1 with… <a href="https://t.co/M8ufEhkDVx">pic.twitter.com/M8ufEhkDVx</a></p>&mdash; Razorpay (@Razorpay) <a href="https://x.com/Razorpay/status/2074817515381997786?ref_src=twsrc%5Etfw">July 8, 2026</a></blockquote>
       </div>
     </div>
   </section>
+  <script is:inline async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
 
   <section class="page-section surface">
     <div class="section-inner" style="text-align: center; max-width: 640px; margin: 0 auto;">
