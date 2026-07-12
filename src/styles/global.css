@@ -211,7 +211,7 @@ a {
 
 /* ── About / Manifesto ───────────────────────────────────── */
 #about {
-  padding: 140px 0;
+  padding: 80px 0;
   border-top: 1px solid var(--border);
 }
 
@@ -241,7 +241,7 @@ a {
 
 /* ── Capabilities ────────────────────────────────────────── */
 #capabilities {
-  padding: 140px 0;
+  padding: 80px 0;
   border-top: 1px solid var(--border);
   background: var(--surface);
 }
@@ -367,7 +367,7 @@ a {
 
 /* ── Philosophy ──────────────────────────────────────────── */
 #philosophy {
-  padding: 160px 0;
+  padding: 80px 0;
   border-top: 1px solid var(--border);
   text-align: center;
 }
@@ -437,6 +437,8 @@ footer {
   font-weight: 300;
   color: var(--text);
   opacity: 0.6;
+.page-section {
+    padding: 100px 0;
 }
 
 .footer-nav a:hover {
@@ -593,7 +595,7 @@ footer {
     margin-right: 0;
   }
 
-  #about, #capabilities, #philosophy { padding: 100px 0; }
+  #about, #capabilities, #philosophy { padding: 48px 0; }
 
   .capabilities-grid { grid-template-columns: 1fr; }
 
@@ -657,8 +659,12 @@ footer {
 
 /* ── Page sections ───────────────────────────────────────── */
 .page-section {
-  padding: 100px 0;
+  padding: 80px 0;
   border-top: 1px solid var(--border);
+}
+
+@media (max-width: 768px) {
+  .page-section { padding: 48px 0; }
 }
 
 .page-section.surface {
@@ -1457,6 +1463,7 @@ a.product-card:hover {
   font-weight: 300;
   line-height: 1.5;
   color: var(--text);
+  margin-top: 32px;
 }
 
 .article .hook strong {
