@@ -1,0 +1,308 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Open Clock | Chouhan Industries | Open Hardware"
+  ogTitle="Open Clock | Chouhan Industries"
+  description="A fully open, configurable clock. Choose your accuracy source, display panel, and power. Every clock is built to order and documented to the source."
+  url="https://chouhan.ai/products/open-clock.html"
+>
+
+  <div class="page-hero">
+    <div class="section-inner">
+      <p class="eyebrow"><a href="/products.html" style="color: inherit; text-decoration: none;">Products</a> / Open Clock</p>
+      <h1>Open Clock</h1>
+      <p class="page-sub">A fully open, configurable clock. Choose the accuracy source, the display panel, and the power
+        supply. Every combination is documented, and every unit is built to your specification.</p>
+    </div>
+  </div>
+
+  <section class="page-section surface" id="open-clock">
+    <div class="section-inner">
+      <div class="about-body">
+        <div>
+          <p class="section-label">The Problem</p>
+          <p class="lead">A clock is the one device you cannot configure.</p>
+          <div class="detail">
+            <p>Accuracy is fixed at the factory. The face is fixed. The power source is fixed. You take what you are
+              given, and when any part fails, the whole object is landfill.</p>
+            <p>Precise timekeeping already exists in GPS, atomic references, and network sync, but it stays locked inside
+              lab equipment and datacenters. A clock on the wall never gets to use it.</p>
+          </div>
+        </div>
+        <div>
+          <p class="section-label">The Approach</p>
+          <p class="lead">One core, disciplined by any source, serving time to everything else.</p>
+          <div class="detail">
+            <p>Open Clock separates timekeeping from everything around it. A common core holds and disciplines time. You
+              choose what feeds it, what displays it, and what powers it. Want sub-microsecond PTP driving a set of
+              analog hands running on solar? That is a configuration, not a custom build.</p>
+            <p>The same core turns around and serves that time back to your network over NTP and PTP, so one accurate
+              clock keeps every device around it honest. And it reports its own accuracy, down to the millisecond and
+              its last sync, so you always know how right it is.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="section-inner">
+      <p class="section-label">Architecture</p>
+      <h2
+        style="font-family: var(--font-display); font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 300; margin-bottom: 48px;">
+        Every layer. Your choice.</h2>
+      <div class="stack-diagram">
+        <div class="stack-layer">
+          <div class="stack-info">
+            <p class="stack-label">Time Source</p>
+            <p class="stack-desc">The reference the clock disciplines to.</p>
+          </div>
+          <div class="stack-chips">
+            <span class="stack-chip">NTP</span>
+            <span class="stack-chip">PTP</span>
+            <span class="stack-chip">GPS</span>
+            <span class="stack-chip">Atomic</span>
+          </div>
+        </div>
+        <div class="stack-layer stack-api">
+          <div class="stack-info">
+            <p class="stack-label">Timekeeping Core</p>
+            <p class="stack-desc">Holds time, and serves it back out.</p>
+          </div>
+          <div class="stack-chips">
+            <span class="stack-chip">Oscillator</span>
+            <span class="stack-chip">RTC</span>
+            <span class="stack-chip">Discipline Loop</span>
+            <span class="stack-chip">Holdover</span>
+            <span class="stack-chip">NTP / PTP Server</span>
+          </div>
+        </div>
+        <div class="stack-layer">
+          <div class="stack-info">
+            <p class="stack-label">Display Panel</p>
+            <p class="stack-desc">The face you read. Driven by the core.</p>
+          </div>
+          <div class="stack-chips">
+            <span class="stack-chip">Analog</span>
+            <span class="stack-chip">Nixie</span>
+            <span class="stack-chip">Mechanical</span>
+            <span class="stack-chip">Digital</span>
+          </div>
+        </div>
+        <div class="stack-layer stack-modules">
+          <div class="stack-info">
+            <p class="stack-label">Power</p>
+            <p class="stack-desc">Whatever keeps it running.</p>
+          </div>
+          <div class="stack-chips">
+            <span class="stack-chip">Solar</span>
+            <span class="stack-chip">Battery</span>
+            <span class="stack-chip">AC</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section surface">
+    <div class="section-inner">
+      <p class="section-label">Configuration</p>
+      <h2
+        style="font-family: var(--font-display); font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 300; margin-bottom: 48px;">
+        Every part. Your call.</h2>
+      <div class="omp-grid">
+        <div class="omp-item">
+          <p class="omp-title">Accuracy</p>
+          <ul class="module-list">
+            <li>NTP Network Sync</li>
+            <li>PTP (sub-microsecond)</li>
+            <li>GPS Satellite</li>
+            <li>Atomic Reference</li>
+            <li>Free-Running RTC</li>
+          </ul>
+        </div>
+        <div class="omp-item">
+          <p class="omp-title">Display Panel</p>
+          <ul class="module-list">
+            <li>Analog Hands (stepper)</li>
+            <li>Nixie Tube</li>
+            <li>Split-Flap</li>
+            <li>Rolling Drum (sheet roll)</li>
+            <li>Digital (LED / LCD / e-paper)</li>
+          </ul>
+        </div>
+        <div class="omp-item">
+          <p class="omp-title">Power Source</p>
+          <ul class="module-list">
+            <li>Solar</li>
+            <li>Rechargeable Battery</li>
+            <li>Always-On AC</li>
+            <li>USB-C</li>
+            <li>Power over Ethernet</li>
+          </ul>
+        </div>
+        <div class="omp-item">
+          <p class="omp-title">Enclosure &amp; Form</p>
+          <ul class="module-list">
+            <li>Brass</li>
+            <li>Aluminum</li>
+            <li>Walnut</li>
+            <li>Desk / Wall / Rack-Mount</li>
+          </ul>
+        </div>
+        <div class="omp-item">
+          <p class="omp-title">Sound &amp; Sensing</p>
+          <ul class="module-list">
+            <li>Chime / Strike</li>
+            <li>Ambient Auto-Dim</li>
+            <li>Temperature</li>
+            <li>Humidity</li>
+          </ul>
+        </div>
+        <div class="omp-item">
+          <p class="omp-title">Network &amp; Extras</p>
+          <ul class="module-list">
+            <li>NTP / PTP Server</li>
+            <li>Accuracy Readout</li>
+            <li>Aux Info Panel</li>
+            <li>World Clock</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="section-inner">
+      <div class="about-body">
+        <div>
+          <p class="section-label">Software</p>
+          <p class="lead">You don't program the clock. You talk to it.</p>
+          <div class="detail">
+            <p>The source, face, and power are chosen when you order the hardware. The SDK is for the running unit:
+              connect to any Open Clock on your network and read the disciplined time straight from the core. Python,
+              Rust, and C.</p>
+            <p>Ask how accurate it is at any moment, and turn its NTP and PTP server on or off. The face on the wall and
+              the time on your network come from the same source.</p>
+          </div>
+        </div>
+        <div>
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-lang">Python</span>
+              <div class="code-dots"><span></span><span></span><span></span></div>
+            </div>
+            <pre><span class="kw">import</span> <span class="c">openclock</span>
+
+<span class="comment"># connect to a clock on your network</span>
+<span class="c">clock</span> = <span class="c">openclock</span>.<span class="fn">connect</span>(<span class="s">"clock.local"</span>)
+
+<span class="comment"># read the disciplined time and its source</span>
+<span class="fn">print</span>(<span class="c">clock</span>.<span class="fn">now</span>())     <span class="comment"># 2026-07-13T03:15:08.002Z</span>
+<span class="fn">print</span>(<span class="c">clock</span>.<span class="c">source</span>)   <span class="comment"># "gps"</span>
+
+<span class="comment"># how right is it, right now?</span>
+<span class="c">acc</span> = <span class="c">clock</span>.<span class="fn">accuracy</span>()
+<span class="fn">print</span>(<span class="c">acc</span>.<span class="c">offset</span>, <span class="c">acc</span>.<span class="c">locked</span>)  <span class="comment"># ±2 ms, True</span>
+
+<span class="comment"># let it serve time to the network</span>
+<span class="c">clock</span>.<span class="fn">serve</span>(<span class="c">ntp</span>=<span class="kw">True</span>, <span class="c">ptp</span>=<span class="kw">True</span>)</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="section-inner">
+      <p class="section-label">Roadmap</p>
+      <h2
+        style="font-family: var(--font-display); font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 300; margin-bottom: 48px;">
+        One clock. Built in stages.</h2>
+      <div class="roadmap-grid">
+        <div class="roadmap-item">
+          <p class="roadmap-phase">Phase 1</p>
+          <h3>Core & Digital Face</h3>
+          <p>The timekeeping core with a digital display, running on battery or AC. NTP over Wi-Fi as the first
+            reference.</p>
+          <span class="status">In Development</span>
+        </div>
+        <div class="roadmap-item">
+          <p class="roadmap-phase">Phase 2</p>
+          <h3>Time Server</h3>
+          <p>The core serves NTP and PTP back to your network and reports its own accuracy. One clock keeps every
+            device around it honest.</p>
+          <span class="status">Planned</span>
+        </div>
+        <div class="roadmap-item">
+          <p class="roadmap-phase">Phase 3</p>
+          <h3>Precision Sources</h3>
+          <p>GPS receiver and PTP network modules. The core learns to discipline against a satellite fix and a
+            grandmaster clock.</p>
+          <span class="status">Planned</span>
+        </div>
+        <div class="roadmap-item">
+          <p class="roadmap-phase">Phase 4</p>
+          <h3>Analog &amp; Mechanical Faces</h3>
+          <p>Stepper hands, nixie tubes, split-flap, and rolling-drum displays, all slaved to the same core and
+            disciplined as tightly as the digital face.</p>
+          <span class="status">Planned</span>
+        </div>
+        <div class="roadmap-item">
+          <p class="roadmap-phase">Phase 5</p>
+          <h3>Power Options</h3>
+          <p>Solar and Power-over-Ethernet modules. The clock runs where there is light or a single cable, with no
+            separate supply.</p>
+          <span class="status">Planned</span>
+        </div>
+        <div class="roadmap-item">
+          <p class="roadmap-phase">Phase 6</p>
+          <h3>Enclosures &amp; Form</h3>
+          <p>Brass, aluminum, and walnut bodies in desk, wall, and rack-mount forms. The same clock, sized for a shelf
+            or a server room.</p>
+          <span class="status">Planned</span>
+        </div>
+        <div class="roadmap-item">
+          <p class="roadmap-phase">Phase 7</p>
+          <h3>Sound &amp; Sensing</h3>
+          <p>Chime and strike on the second, ambient auto-dimming, and temperature and humidity readouts on the aux
+            panel.</p>
+          <span class="status">Research</span>
+        </div>
+        <div class="roadmap-item">
+          <p class="roadmap-phase">Phase 8</p>
+          <h3>Atomic Holdover</h3>
+          <p>An oven-controlled and rubidium reference option, disciplined by GPS, for accuracy that survives losing
+            every network.</p>
+          <span class="status">Research</span>
+        </div>
+        <div class="roadmap-item">
+          <p class="roadmap-phase">Phase 9</p>
+          <h3>Open Configurator</h3>
+          <p>Publish the full connector specification so any face, source, or supply can be built by anyone. The clock
+            becomes a standard.</p>
+          <span class="status">Research</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section surface">
+    <div class="section-inner" style="text-align: center; max-width: 640px; margin: 0 auto;">
+      <p class="section-label">Get Involved</p>
+      <h2
+        style="font-family: var(--font-display); font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 300; margin-bottom: 16px;">
+        The core is open. The clock is yours to configure.</h2>
+      <p style="font-size: 0.875rem; font-weight: 300; color: var(--muted); line-height: 1.8; margin-bottom: 40px;">We
+        are in active design. Follow the build log, contribute to the specification, or propose a face, source, power, or
+        enclosure module.</p>
+      <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+        <a href="/open-source.html" class="btn-primary">View Repository</a>
+        <a href="/blog.html" class="btn-secondary">Build Log</a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

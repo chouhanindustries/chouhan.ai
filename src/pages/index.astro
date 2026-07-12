@@ -30,11 +30,14 @@ import oshwLogo from '../assets/oshw-logo-800-px.webp';
   <section id="about">
     <div class="section-inner">
       <div class="manifesto-block">
-        <p class="manifesto-text">
-          Chouhan Industries was founded on a single conviction: that the best hardware should be free for
-          anyone to study, build upon, and improve. We manufacture to the highest standard and publish
-          everything: schematics, processes, and tolerances, without restriction.
-        </p>
+        <div class="manifesto-text">
+          <p>Chouhan Industries was founded on a single conviction: that the best hardware should be
+            <em>free for anyone</em> to study, build upon, and improve.</p>
+          <p>We manufacture to the highest standard and publish everything: schematics, processes, and
+            tolerances, without restriction.</p>
+          <p>The goal is <em>consumer products you truly own</em>: fully open, <em>customizable</em> down to
+            the source, and yours to build from the files, adapt to your needs, or simply buy finished.</p>
+        </div>
         <Image src={oshwLogo} alt="Open Source Hardware" width={140} densities={[1, 2]} class="oshw-badge" />
       </div>
     </div>
@@ -75,6 +78,11 @@ import oshwLogo from '../assets/oshw-logo-800-px.webp';
       <h2 class="philosophy-statement">
         Hardware is<br>too important<br>to be kept<br><em>closed.</em>
       </h2>
+      <p class="philosophy-support">
+        Open source is the way forward because transparency scales better than trust. Closed systems ask
+        you to believe. Open ones let you verify, which means faster bug discovery, stronger security,
+        and compounding innovation.
+      </p>
     </div>
   </section>
 

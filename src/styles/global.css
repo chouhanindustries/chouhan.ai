@@ -230,13 +230,24 @@ a {
 }
 
 .manifesto-text {
+  max-width: 760px;
+}
+
+.manifesto-text p {
   font-family: var(--font-body);
   font-size: clamp(1.05rem, 1.6vw, 1.3rem);
   font-weight: 300;
   line-height: 1.9;
-  color: var(--text);
-  opacity: 0.75;
-  max-width: 760px;
+  color: rgba(250, 250, 250, 0.72);
+}
+
+.manifesto-text p + p {
+  margin-top: 22px;
+}
+
+.manifesto-text em {
+  font-style: normal;
+  color: var(--gold);
 }
 
 /* ── Capabilities ────────────────────────────────────────── */
@@ -383,6 +394,14 @@ a {
 .philosophy-statement em {
   font-style: italic;
   color: var(--gold);
+}
+
+.philosophy-support {
+  max-width: 640px;
+  margin: 40px auto 0;
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: var(--muted);
 }
 
 /* ── Footer ──────────────────────────────────────────────── */
@@ -826,6 +845,11 @@ a.product-card:hover {
 
 .about-body .detail p + p {
   margin-top: 16px;
+}
+
+.about-body em {
+  font-style: normal;
+  color: var(--gold);
 }
 
 .team-grid {

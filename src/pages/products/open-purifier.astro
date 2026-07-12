@@ -1,0 +1,296 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Open Purifier | Chouhan Industries | Open Hardware"
+  ogTitle="Open Purifier | Chouhan Industries"
+  description="A fully open, modular water purifier. Choose your filtration stages, sensors, and power, and see exactly what is in your water and what comes out."
+  url="https://chouhan.ai/products/open-purifier.html"
+>
+
+  <div class="page-hero">
+    <div class="section-inner">
+      <p class="eyebrow"><a href="/products.html" style="color: inherit; text-decoration: none;">Products</a> / Open Purifier</p>
+      <h1>Open Purifier</h1>
+      <p class="page-sub">A fully open, modular water purifier. Choose the filtration stages, the sensors, and the power
+        supply. Every cartridge is documented, and the core measures your water going in and coming out, so you can see
+        exactly what it removed.</p>
+    </div>
+  </div>
+
+  <section class="page-section surface" id="open-purifier">
+    <div class="section-inner">
+      <div class="about-body">
+        <div>
+          <p class="section-label">The Problem</p>
+          <p class="lead">Your filter is a black box, and so is your water.</p>
+          <div class="detail">
+            <p>Cartridges are proprietary and sealed. Some carry a chip so the unit refuses any filter but the
+              manufacturer's own. You cannot inspect the media, substitute it, or refill it, and the day the company
+              stops selling the cartridge, the whole appliance is landfill.</p>
+            <p>Worse, you never learn what the filter actually did. The sensors, if there are any, report a green light
+              and nothing else. You are asked to trust a closed box with the one thing you drink every day.</p>
+          </div>
+        </div>
+        <div>
+          <p class="section-label">The Approach</p>
+          <p class="lead">An open filtration stack, measured going in and coming out.</p>
+          <div class="detail">
+            <p>Open Purifier separates the water from everything around it. Stages are swappable modules on a standard
+              housing. Choose sediment, carbon, reverse osmosis, ultrafiltration, and UV in the order your water needs.
+              Every membrane and cartridge is documented and refillable, and third-party media drops straight in.</p>
+            <p>A common monitoring core sits across the stack and reads the water before and after each stage. It tells
+              you your TDS, turbidity, and pH in and out, tracks how much life each filter has left, and serves all of
+              it to your network. The green light becomes a number you can check.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="section-inner">
+      <p class="section-label">Architecture</p>
+      <h2
+        style="font-family: var(--font-display); font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 300; margin-bottom: 48px;">
+        Every stage. Your choice.</h2>
+      <div class="stack-diagram">
+        <div class="stack-layer">
+          <div class="stack-info">
+            <p class="stack-label">Source Input</p>
+            <p class="stack-desc">The water that feeds the stack.</p>
+          </div>
+          <div class="stack-chips">
+            <span class="stack-chip">Tap</span>
+            <span class="stack-chip">Well</span>
+            <span class="stack-chip">Rainwater</span>
+            <span class="stack-chip">Tank</span>
+          </div>
+        </div>
+        <div class="stack-layer stack-modules">
+          <div class="stack-info">
+            <p class="stack-label">Filtration Stages</p>
+            <p class="stack-desc">Swappable modules, in the order you need.</p>
+          </div>
+          <div class="stack-chips">
+            <span class="stack-chip">Sediment</span>
+            <span class="stack-chip">Carbon</span>
+            <span class="stack-chip">RO Membrane</span>
+            <span class="stack-chip">Ultrafiltration</span>
+            <span class="stack-chip">UV</span>
+            <span class="stack-chip">Remineralizer</span>
+          </div>
+        </div>
+        <div class="stack-layer stack-api">
+          <div class="stack-info">
+            <p class="stack-label">Monitoring Core</p>
+            <p class="stack-desc">Reads the water in and out, and serves it back.</p>
+          </div>
+          <div class="stack-chips">
+            <span class="stack-chip">Flow</span>
+            <span class="stack-chip">TDS</span>
+            <span class="stack-chip">Sensors</span>
+            <span class="stack-chip">Filter Life</span>
+            <span class="stack-chip">Logging</span>
+            <span class="stack-chip">API Server</span>
+          </div>
+        </div>
+        <div class="stack-layer">
+          <div class="stack-info">
+            <p class="stack-label">Output</p>
+            <p class="stack-desc">Where the clean water goes.</p>
+          </div>
+          <div class="stack-chips">
+            <span class="stack-chip">Drinking Tap</span>
+            <span class="stack-chip">Storage Tank</span>
+            <span class="stack-chip">Dispense</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section surface">
+    <div class="section-inner">
+      <p class="section-label">Configuration</p>
+      <h2
+        style="font-family: var(--font-display); font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 300; margin-bottom: 48px;">
+        Every part. Your call.</h2>
+      <div class="omp-grid">
+        <div class="omp-item">
+          <p class="omp-title">Filtration Stages</p>
+          <ul class="module-list">
+            <li>Sediment (5 / 1 micron)</li>
+            <li>Activated Carbon</li>
+            <li>Reverse Osmosis</li>
+            <li>Ultrafiltration</li>
+            <li>UV Sterilizer</li>
+          </ul>
+        </div>
+        <div class="omp-item">
+          <p class="omp-title">Sensing</p>
+          <ul class="module-list">
+            <li>TDS (in and out)</li>
+            <li>Turbidity</li>
+            <li>pH</li>
+            <li>Flow Rate</li>
+            <li>Filter Life</li>
+          </ul>
+        </div>
+        <div class="omp-item">
+          <p class="omp-title">Membrane &amp; Cartridge</p>
+          <ul class="module-list">
+            <li>Standard Housing</li>
+            <li>Refillable Cartridge</li>
+            <li>Third-Party Media</li>
+            <li>Remineralizer</li>
+            <li>No DRM</li>
+          </ul>
+        </div>
+        <div class="omp-item">
+          <p class="omp-title">Dispense</p>
+          <ul class="module-list">
+            <li>Drinking Tap</li>
+            <li>Chilled</li>
+            <li>Hot</li>
+            <li>Sparkling</li>
+            <li>Storage Tank</li>
+          </ul>
+        </div>
+        <div class="omp-item">
+          <p class="omp-title">Monitoring</p>
+          <ul class="module-list">
+            <li>Live Readout</li>
+            <li>Timestamped Log</li>
+            <li>API Server</li>
+            <li>Filter Alerts</li>
+            <li>Auto Flush</li>
+          </ul>
+        </div>
+        <div class="omp-item">
+          <p class="omp-title">Enclosure &amp; Power</p>
+          <ul class="module-list">
+            <li>Countertop</li>
+            <li>Under-Sink</li>
+            <li>Wall-Mount</li>
+            <li>Stainless / Glass</li>
+            <li>Standard AC</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="section-inner">
+      <div class="about-body">
+        <div>
+          <p class="section-label">Software</p>
+          <p class="lead">You don't trust the light. You read the water.</p>
+          <div class="detail">
+            <p>The stages, power, and form are chosen when you order the hardware. The SDK is for the running unit:
+              connect to any Open Purifier on your network and read the water quality straight from the core, in and
+              out. Python, Rust, and C.</p>
+            <p>Ask what each filter has left, trigger a flush, and log every reading over time. The number on the wall
+              and the number on your network come from the same sensors.</p>
+          </div>
+        </div>
+        <div>
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-lang">Python</span>
+              <div class="code-dots"><span></span><span></span><span></span></div>
+            </div>
+            <pre><span class="kw">import</span> <span class="c">openpurifier</span>
+
+<span class="comment"># connect to a purifier on your network</span>
+<span class="c">unit</span> = <span class="c">openpurifier</span>.<span class="fn">connect</span>(<span class="s">"purifier.local"</span>)
+
+<span class="comment"># read the water going in and coming out</span>
+<span class="c">water</span> = <span class="c">unit</span>.<span class="fn">quality</span>()
+<span class="fn">print</span>(<span class="c">water</span>.<span class="c">tds_in</span>, <span class="c">water</span>.<span class="c">tds_out</span>)  <span class="comment"># 412, 18 ppm</span>
+<span class="fn">print</span>(<span class="c">water</span>.<span class="c">ph</span>, <span class="c">water</span>.<span class="c">turbidity</span>)     <span class="comment"># 7.2, 0.1 NTU</span>
+
+<span class="comment"># how much life is left in each stage?</span>
+<span class="kw">for</span> <span class="c">stage</span> <span class="kw">in</span> <span class="c">unit</span>.<span class="fn">filters</span>():
+    <span class="fn">print</span>(<span class="c">stage</span>.<span class="c">name</span>, <span class="c">stage</span>.<span class="c">life</span>)  <span class="comment"># "carbon", 0.63</span>
+
+<span class="comment"># flush the membrane on demand</span>
+<span class="c">unit</span>.<span class="fn">flush</span>()</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="section-inner">
+      <p class="section-label">Roadmap</p>
+      <h2
+        style="font-family: var(--font-display); font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 300; margin-bottom: 48px;">
+        One purifier. Built in stages.</h2>
+      <div class="roadmap-grid">
+        <div class="roadmap-item">
+          <p class="roadmap-phase">Phase 1</p>
+          <h3>Core &amp; Basic Filtration</h3>
+          <p>The monitoring core with a sediment and carbon stack on a standard housing. The first open cartridge you can
+            open, inspect, and refill.</p>
+          <span class="status">In Development</span>
+        </div>
+        <div class="roadmap-item">
+          <p class="roadmap-phase">Phase 2</p>
+          <h3>Water Monitoring</h3>
+          <p>TDS, turbidity, and pH sensors read the water in and out. A live readout and a timestamped log, on the unit
+            and served to your network.</p>
+          <span class="status">Planned</span>
+        </div>
+        <div class="roadmap-item">
+          <p class="roadmap-phase">Phase 3</p>
+          <h3>Membrane &amp; Advanced Stages</h3>
+          <p>Reverse osmosis, ultrafiltration, and UV modules. The core learns to flush the membrane and track its life
+            across every stage.</p>
+          <span class="status">Planned</span>
+        </div>
+        <div class="roadmap-item">
+          <p class="roadmap-phase">Phase 4</p>
+          <h3>Open Cartridge Standard</h3>
+          <p>Publish the housing and cartridge specification. Refillable bodies, third-party media, and remineralizers
+            drop into any Open Purifier without a chip to defeat.</p>
+          <span class="status">Planned</span>
+        </div>
+        <div class="roadmap-item">
+          <p class="roadmap-phase">Phase 5</p>
+          <h3>Form Factors</h3>
+          <p>Under-sink, wall-mount, and countertop bodies in stainless and glass, all running on standard AC. The same
+            core, sized for a kitchen or a building.</p>
+          <span class="status">Research</span>
+        </div>
+        <div class="roadmap-item">
+          <p class="roadmap-phase">Phase 6</p>
+          <h3>Open Purifier Standard</h3>
+          <p>Publish the full connector and housing specification so any stage, sensor, or supply can be built by anyone.
+            The purifier becomes a standard.</p>
+          <span class="status">Research</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section surface">
+    <div class="section-inner" style="text-align: center; max-width: 640px; margin: 0 auto;">
+      <p class="section-label">Get Involved</p>
+      <h2
+        style="font-family: var(--font-display); font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 300; margin-bottom: 16px;">
+        The stack is open. The water is yours to see.</h2>
+      <p style="font-size: 0.875rem; font-weight: 300; color: var(--muted); line-height: 1.8; margin-bottom: 40px;">We
+        are in active design. Follow the build log, contribute to the specification, or propose a filtration stage,
+        sensor, or cartridge.</p>
+      <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+        <a href="/open-source.html" class="btn-primary">View Repository</a>
+        <a href="/blog.html" class="btn-secondary">Build Log</a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
