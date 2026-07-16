@@ -1,0 +1,4 @@
+schema: spec-driven
+created: 2026-07-15
+goal: Give chouhan.ai a minimal owned backend for form capture without turning
+  it into an app; email sending and commerce stay out of scope
