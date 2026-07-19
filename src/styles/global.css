@@ -98,6 +98,7 @@ a {
 .nav-links {
   list-style: none;
   display: flex;
+  align-items: center;
   gap: 40px;
 }
 
@@ -111,6 +112,31 @@ a {
 
 .nav-links a:hover {
   color: var(--text);
+}
+
+/* GitHub is a bordered button rather than a plain nav link. */
+.nav-links a.nav-github {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.nav-links a.nav-github:hover {
+  background: var(--gold);
+  color: var(--bg);
+}
+
+.nav-github svg {
+  display: block;
+  flex-shrink: 0;
 }
 
 /* ── Hero ────────────────────────────────────────────────── */
@@ -419,7 +445,7 @@ footer {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 80px 0;
+  padding: 56px 0;
 }
 
 .footer-wordmark {
@@ -444,7 +470,13 @@ footer {
   opacity: 0.6;
 }
 
+/* Two columns; Footer.astro splits the link list so the shorter column is on the left. */
 .footer-nav {
+  display: flex;
+  gap: 64px;
+}
+
+.footer-nav-col {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -505,10 +537,12 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.65rem;
-  font-weight: 500;
-  letter-spacing: 0.05em;
   color: var(--muted);
+  transition: border-color 0.25s ease, color 0.25s ease;
+}
+
+.footer-social svg {
+  display: block;
 }
 
 .footer-social a:hover {
@@ -588,6 +622,13 @@ footer {
   color: var(--text);
 }
 
+.mobile-menu ul li a.mobile-github {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--gold);
+}
+
 /* ── Responsive ──────────────────────────────────────────── */
 @media (max-width: 768px) {
   .nav-inner { padding: 0 24px; }
@@ -622,11 +663,15 @@ footer {
 
   .footer-top {
     flex-direction: column;
-    gap: 48px;
-    padding: 60px 0;
+    gap: 36px;
+    padding: 44px 0;
   }
 
   .footer-nav {
+    gap: 40px;
+  }
+
+  .footer-nav-col {
     align-items: flex-start;
   }
 
@@ -1203,7 +1248,7 @@ a.product-card:hover {
 .code-lang {
   font-family: 'IBM Plex Mono', 'Courier New', monospace;
   font-size: 0.7rem;
-  font-weight: 400;
+  font-weight: 700;
   letter-spacing: 0.1em;
   color: var(--muted);
   text-transform: uppercase;
@@ -1220,6 +1265,11 @@ a.product-card:hover {
   border-radius: 50%;
   background: var(--subtle);
 }
+
+/* Traffic lights, slightly desaturated so they sit in the dark palette */
+.code-dots span:nth-child(1) { background: #E05A50; }
+.code-dots span:nth-child(2) { background: #DDA53A; }
+.code-dots span:nth-child(3) { background: #4FB05E; }
 
 .code-block pre {
   padding: 28px 32px;
@@ -1620,6 +1670,39 @@ a.product-card:hover {
     letter-spacing: 0.14em;
     text-transform: uppercase;
   }
+
+  /* Key/value tables (.kv): the first cell is already the label, so instead of
+     one card per row, keep a single bordered box with the label captioned above
+     each value */
+  .article table.kv {
+    border: 1px solid var(--border);
+  }
+
+  .article table.kv tbody tr {
+    border: 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 0;
+  }
+
+  .article table.kv tbody tr:last-child {
+    border-bottom: 0;
+  }
+
+  .article table.kv tbody td:first-child {
+    background: none;
+    border-bottom: 0;
+    padding: 12px 16px 0;
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .article table.kv tbody td:last-child {
+    padding: 2px 16px 12px;
+    overflow-wrap: anywhere;
+  }
 }
 
 /* Numbered workflow steps */
@@ -1669,6 +1752,64 @@ a.product-card:hover {
   height: auto;
   border: 1px solid var(--border);
   background: var(--surface);
+}
+
+/* ── Deck Card ── */
+
+.deck-card {
+  position: relative;
+  display: block;
+  border: 1px solid var(--border);
+  transition: border-color 0.25s ease;
+}
+
+.article-figure .deck-card img {
+  border: none;
+}
+
+.deck-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 55%, rgba(9, 9, 11, 0.85));
+  pointer-events: none;
+}
+
+.deck-cta {
+  position: absolute;
+  left: 50%;
+  bottom: 48px;
+  transform: translateX(-50%);
+  z-index: 1;
+  display: inline-block;
+  background: rgba(9, 9, 11, 0.7);
+  color: var(--gold);
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 12px 28px;
+  border: 1px solid var(--gold);
+  white-space: nowrap;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.deck-card:hover {
+  border-color: var(--gold);
+}
+
+.deck-card:hover .deck-cta {
+  background: var(--gold);
+  color: var(--bg);
+}
+
+@media (max-width: 768px) {
+  .deck-cta {
+    bottom: 26px;
+    padding: 9px 16px;
+    font-size: 0.62rem;
+  }
 }
 
 .article-figure figcaption {

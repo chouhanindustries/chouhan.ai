@@ -5,6 +5,8 @@ interface Props {
 
 const { home = false } = Astro.props;
 
+const github = 'https://github.com/chouhanindustries';
+
 // Root-relative hrefs so the chrome works from nested pages (e.g. /products/*).
 const links = [
   { href: '/products.html', label: 'Products' },
@@ -13,7 +15,12 @@ const links = [
   { href: '/blog.html', label: 'Blog' },
   { href: '/careers.html', label: 'Careers' },
   { href: '/contact.html', label: 'Contact' },
+  { href: github, label: 'GitHub', external: true },
 ];
+
+// Two columns, smaller one on the left (7 links -> 3 | 4).
+const split = Math.floor(links.length / 2);
+const columns = [links.slice(0, split), links.slice(split)];
 ---
 
 <footer>
@@ -22,8 +29,12 @@ const links = [
       <a href={home ? '#hero' : '/index.html'} class="footer-wordmark"><img src="/assets/favicons/logo-icon.svg" alt="Chouhan Industries"
           width="259" height="251" loading="lazy" class="footer-logo">CHOUHAN INDUSTRIES</a>
       <nav class="footer-nav">
-        {links.map((link) => (
-          <a href={link.href}>{link.label}</a>
+        {columns.map((column) => (
+          <div class="footer-nav-col">
+            {column.map((link) => (
+              <a href={link.href} target={link.external ? '_blank' : undefined} rel={link.external ? 'noopener noreferrer' : undefined}>{link.label}</a>
+            ))}
+          </div>
         ))}
       </nav>
     </div>
@@ -35,9 +46,22 @@ const links = [
       </div>
       <p class="footer-copy">&copy; 2026 Chouhan Industries. All rights reserved.</p>
       <div class="footer-social">
-        <a href="https://x.com/chouhan_ai" target="_blank" rel="noopener noreferrer" aria-label="X">X</a>
+        <a href="https://x.com/chouhan_ai" target="_blank" rel="noopener noreferrer" aria-label="X">
+          <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" fill="currentColor">
+            <path d="M9.52 6.77 15.48 0h-1.41L8.9 5.88 4.76 0H0l6.25 8.9L0 16h1.41l5.46-6.21L11.24 16H16L9.52 6.77Zm-1.93 2.2-.63-.89L1.92 1.04h2.17l4.06 5.7.63.89 5.28 7.41h-2.17L7.59 8.97Z"/>
+          </svg>
+        </a>
         <a href="https://www.linkedin.com/company/chouhan-industries" target="_blank" rel="noopener noreferrer"
-          aria-label="LinkedIn">in</a>
+          aria-label="LinkedIn">
+          <svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true" fill="currentColor">
+            <path d="M3.58 16V5.32H.03V16h3.55ZM1.81 3.86c1.24 0 2.01-.82 2.01-1.85C3.8.96 3.05.15 1.83.15S-.19.96-.19 2.01c0 1.03.77 1.85 1.97 1.85h.03Zm3.73 12.14h3.55v-5.96c0-.32.02-.64.12-.87.25-.64.84-1.3 1.82-1.3 1.29 0 1.8.98 1.8 2.41V16h3.55V9.97c0-3.28-1.75-4.81-4.09-4.81-1.87 0-2.71 1.03-3.18 1.75h.02V5.32H5.54c.05 1 0 10.68 0 10.68Z"/>
+          </svg>
+        </a>
+        <a href={github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+          <svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true" fill="currentColor">
+            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.42 7.42 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/>
+          </svg>
+        </a>
       </div>
     </div>
   </div>

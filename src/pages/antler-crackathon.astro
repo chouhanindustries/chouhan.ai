@@ -1,0 +1,273 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
+import pcbRender from '../assets/pcb.png';
+---
+
+<BaseLayout
+  title="Cursor for Circuit Boards | Chouhan Industries"
+  ogTitle="Cursor for Circuit Boards"
+  description="copperhead is an AI agent that designs, documents, and validates real PCBs from a prompt, working on the KiCad files already in your repository. Born from building Open Telegraph, a shipping open source board, then proven by redesigning it. Submitted to the Antler Crackathon."
+  url="https://chouhan.ai/antler-crackathon.html"
+>
+
+  <div class="page-hero">
+    <div class="section-inner">
+      <p class="article-kicker">Antler Crackathon &middot; Submission</p>
+      <div style="max-width: 720px; margin: 0 auto; text-align: center;">
+        <h1 style="text-align: center;">Cursor for Circuit Boards</h1>
+        <p class="page-sub" style="margin: 0 auto;">An AI agent that designs, documents, and validates real PCBs from a
+          prompt.</p>
+      </div>
+    </div>
+  </div>
+
+  <section class="page-section">
+    <div class="section-inner">
+      <div class="event-banner">
+        <span class="event-tag">copperhead</span>
+        <span class="event-meta">Everyone here is pointing an agent at code. copperhead points one at a circuit board,
+          and it doesn't finish until KiCad's own checkers say the result is clean.</span>
+      </div>
+
+      <article class="article">
+        <p class="hook">Most Claude demos are software.<br /><strong>This one is a circuit board.</strong></p>
+
+        <figure class="article-figure">
+          <a class="deck-card" href="/assets/Copperhead.pdf" target="_blank" rel="noopener noreferrer">
+            <img src="/assets/Copperhead.png" alt="Title slide of the copperhead pitch deck" width="960" height="540"
+              loading="lazy" decoding="async" />
+            <span class="deck-cta">View the full deck (PDF)</span>
+          </a>
+          <figcaption>The Crackathon pitch deck, as submitted</figcaption>
+        </figure>
+
+        <p>It works on the KiCad files already in your repository: the schematic, the layout, the bill of materials, the
+          pinout, the design docs. It reads and edits the real <code>.kicad_sch</code> and <code>.kicad_pcb</code>
+          sources, propagates every change across everything that references it, and verifies its own work by running
+          <code>kicad-cli</code> ERC and DRC until the checks pass.</p>
+
+        <div class="table-wrap">
+          <table class="kv">
+            <thead>
+              <tr><th>Submission</th><th></th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Team</td><td>Chouhan Industries</td></tr>
+              <tr><td>Built by</td><td>Animesh Chouhan</td></tr>
+              <tr><td>Repo</td><td><a href="https://github.com/chouhanindustries/copperhead" target="_blank" rel="noopener noreferrer">chouhanindustries/copperhead</a></td></tr>
+              <tr><td>Proof board</td><td><a href="https://github.com/animesh-chouhan/open-telegraph" target="_blank" rel="noopener noreferrer">animesh-chouhan/open-telegraph</a></td></tr>
+              <tr><td>Slides</td><td><a href="/assets/Copperhead.pdf" target="_blank" rel="noopener noreferrer">Copperhead.pdf</a></td></tr>
+              <tr><td>License</td><td>Apache-2.0</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <figure class="article-figure">
+          <Image src={pcbRender} alt="Open Telegraph board, a 40 by 40 mm ESP32-S3 Morse key, 3D render" width={860}
+            densities={[1, 2]} loading="lazy" />
+          <figcaption>Open Telegraph, the board whose build produced copperhead, then was redesigned through it</figcaption>
+        </figure>
+
+        <h2>The problem, and who hurts</h2>
+        <p>Hardware design is one specialist holding an entire board's constraints in their head for months. Input
+          range, quiescent current, package, sourceability, strapping pins, antenna keepout: every part choice touches
+          all of them at once, and every change ripples into five documents that nobody updates in time.</p>
+
+        <p>So the docs drift from the schematic. The BOM drifts from both. And the traps get caught at bring-up, or
+          after the boards come back from fab, at $200 and three weeks a spin.</p>
+
+        <p>This is not a guess. It's what building
+          <a href="/products/open-telegraph.html">Open Telegraph</a> looked like before the agent existed: a 40 × 40 mm
+          ESP32-S3 Morse key with a 25 µA deep sleep budget, where one wrong regulator, a part whose quiescent draw
+          alone eats the entire budget, silently kills the product.</p>
+
+        <h2>What we built</h2>
+        <p>An agent loop that leaves artifacts on disk, not advice in a chat window.</p>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">Shell</span>
+            <div class="code-dots"><span></span><span></span><span></span></div>
+          </div>
+          <pre><span class="fn">copperhead</span> <span class="c">do</span> <span class="s">"move the key input to a different RTC-capable pin"</span></pre>
+        </div>
+
+        <p>It reads the MCU strapping table, picks an RTC-capable pin that isn't a strapping pin, edits the schematic,
+          propagates the new pin into the pinout and subsystem docs and the firmware scaffold, runs
+          <code>kicad-cli</code> ERC until it's clean, and commits with the reasoning attached.</p>
+
+        <p>The same loop runs from nothing: hand it a product brief and it produces a specification with every
+          assumption flagged, an architecture, part selection with a justification per line, an ERC-clean schematic, a
+          DRC-clean draft layout, gerbers, renders, a BOM you can order, and a bring-up plan. Every stage is gated by
+          real validation tooling before the next one starts.</p>
+
+        <figure class="article-figure">
+          <img src="/assets/images/routing.gif" alt="copperhead routing a board" width="800" height="640" loading="lazy"
+            decoding="async" />
+          <figcaption>copperhead routing a board</figcaption>
+        </figure>
+
+        <p>The draft layout is correct, not optimal, and it says so itself, in a <code>LAYOUT.md</code> that lists
+          exactly what a specialist should redo before fab. Non-optimal is acceptable. Unlabeled non-optimal is not.</p>
+
+        <h2>Two invariants</h2>
+        <p>What makes the loop trustworthy isn't the model, it's what the model isn't allowed to do:</p>
+        <ol class="workflow">
+          <li><strong>Nothing starts without a spec.</strong> The agent can't touch a KiCad file until a validated
+            change proposal exists; the edit tools are structurally unavailable until it does. Every edit is traceable
+            to a documented intent.</li>
+          <li><strong>Nothing is "done" until the tools agree.</strong> Every file mutation is followed by an ERC/DRC
+            run before the agent reports success, and every mutation happens inside a git snapshot that rolls back if
+            verification fails.</li>
+        </ol>
+        <p>Spec-gated in, verification-gated out: the design can't drift from its requirements, because drift is a build
+          failure.</p>
+
+        <h2>The before and after</h2>
+        <p>The honest read on a real board:</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th></th><th>Today</th><th>With copperhead</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Idea to manufacturable files</td><td data-label="Today">Weeks to months</td><td data-label="With copperhead">Days</td></tr>
+              <tr><td>Docs vs. schematic</td><td data-label="Today">Drift by default</td><td data-label="With copperhead">Regenerated on every change</td></tr>
+              <tr><td>Datasheet traps</td><td data-label="Today">Caught at bring-up</td><td data-label="With copperhead">Caught before commit</td></tr>
+              <tr><td>Who can do it</td><td data-label="Today">A hardware specialist</td><td data-label="With copperhead">One person with a repo</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>That's a 10x reduction in time plus a collapse in error rate. The second effect is the one that makes it stick:
+          once a change to your board propagates everywhere and self-verifies, going back to updating five documents by
+          hand feels broken.</p>
+
+        <h2>Where we sit against the field</h2>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Competitor</th><th>What they do</th><th>The gap</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Flux.ai</td><td data-label="What they do">Agentic AI inside their own browser ECAD</td><td data-label="The gap">Closed source, and you must move into their editor</td></tr>
+              <tr><td>Diode</td><td data-label="What they do">AI board design as a service</td><td data-label="The gap">$10k to $50k per board, an outcome you buy, not a tool you own</td></tr>
+              <tr><td>Quilter</td><td data-label="What they do">Physics-driven AI layout, per board</td><td data-label="The gap">Layout only, no design reasoning or docs</td></tr>
+              <tr><td>DeepPCB</td><td data-label="What they do">RL placement and routing</td><td data-label="The gap">Same, and you pay per minute of compute, results or not</td></tr>
+              <tr><td>siliXon</td><td data-label="What they do">Text to PCB from scratch</td><td data-label="The gap">Doesn't iterate on designs that exist</td></tr>
+              <tr><td>Siemens Fuse</td><td data-label="What they do">Agentic AI across Xpedition and HyperLynx</td><td data-label="The gap">Enterprise-only, locked toolchain</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>Everyone else is an autorouter, a walled-garden editor, or an enterprise EDA add-on. copperhead is the only
+          agentic workflow that runs on open, real files in the repo you already have. "Cursor on your repo," not "come
+          use our IDE."</p>
+
+        <h2>Global on day zero</h2>
+        <p>KiCad is the default open source ECAD tool worldwide, and the proof board is published under CERN-OHL-S v2.0.
+          There's nothing India-specific in the product: the first user in Berlin and the first user in Bengaluru run
+          the same <code>npm install</code> against the same file formats.</p>
+
+        <p>The market underneath this is specific and growing. EDA for PCBs and multichip modules, the segment
+          copperhead actually plays in, is worth $9.8B today and projected to reach $18.2B by 2034 at a 7.3% CAGR,
+          inside a broader $20B+ EDA market being pulled toward AI-enhanced flows and cloud deployment.</p>
+
+        <p>It's also concentrated: Cadence, Synopsys, Siemens EDA, and Altium dominate, selling seats into closed
+          enterprise toolchains (Allegro, Xpedition, Altium Designer) priced and packaged for teams that already have
+          a hardware department. The one tool in that top tier that isn't a walled seat is KiCad. That's the opening:
+          copperhead enters from underneath, on the open file formats a single builder already has in their repo, in
+          Asia-Pacific manufacturing hubs and everywhere else at once.</p>
+
+        <h2>Go-to-market</h2>
+        <p>Three segments, in order: indie hardware builders, crowdfunded-device startups, and small EE consultancies
+          who bill by the board.</p>
+        <p>The channel is the product. copperhead is Apache-2.0 and Open Telegraph is fully public, so the first hundred
+          users land through the repo itself, Hacker News, r/PrintedCircuitBoard, the KiCad community, with the board as
+          the proof that none of this is a demo. Monetization is a design-agent SaaS on top of the open CLI: hosted
+          runs, longer context over a design history, and team-level review.</p>
+
+        <h2>Try it</h2>
+
+        <p>copperhead is open source and now live at
+          <a href="https://copperhead.sh" target="_blank" rel="noopener noreferrer">copperhead.sh</a>. Docs:
+          <a href="https://copperhead.sh/docs" target="_blank" rel="noopener noreferrer">copperhead.sh/docs</a>.</p>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">Shell</span>
+            <div class="code-dots"><span></span><span></span><span></span></div>
+          </div>
+          <pre><span class="fn">npm</span> <span class="c">i</span> <span class="kw">-g</span> <span class="c">@chouhan/copperhead</span>
+<span class="kw">export</span> <span class="c">ANTHROPIC_API_KEY</span>=<span class="s">&lt;api-key&gt;</span>
+
+<span class="fn">copperhead</span> <span class="c">create</span> <span class="kw">--brief</span> <span class="c">brief.md</span></pre>
+        </div>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">brief.md</span>
+            <div class="code-dots"><span></span><span></span><span></span></div>
+          </div>
+          <pre><span class="fn"># Pocket Morse key</span>
+
+<span class="c">A pocket-size Morse key that types over
+Bluetooth as a standard keyboard.</span>
+
+<span class="kw">-</span> <span class="c">ESP32-S3, BLE HID</span>
+<span class="kw">-</span> <span class="c">Li-Po cell, USB-C charging</span>
+<span class="kw">-</span> <span class="c">Sleep current budget: 25 µA</span>
+<span class="kw">-</span> <span class="c">3.5 mm jack for an external paddle</span></pre>
+        </div>
+
+        <p>Everything it writes is plain markdown, JSON, and KiCad source. There's no proprietary format to get stuck
+          in, and no editor to move into.</p>
+
+        <div class="demo-box">
+          <p class="demo-box-label">What this looks like live</p>
+          <p>One prompt against a real board. copperhead reads the design docs, proposes the change, edits the KiCad
+            schematic, carries the new pin across every doc and the firmware scaffold, runs ERC and DRC, reads the
+            violations back, and commits with the reasoning attached. A circuit board, redesigned in front of you.</p>
+        </div>
+
+        <h2>The point</h2>
+        <p>The Morse key is the proof; the agent is the product. Building Open Telegraph produced copperhead, and
+          redesigning the board through copperhead proved it. Now that loop is packaged so anyone can run it: one
+          person, one repo, from idea to manufacturable files in days instead of months. For the longer story of how it came together, see
+          <a href="/building-with-claude.html">building open hardware with Claude</a>.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="section-inner">
+      <p class="section-label" style="text-align: center;">The Event</p>
+      <div class="tweet-embed">
+        <blockquote class="twitter-tweet" data-theme="dark"><p lang="en" dir="ltr">1,000+ builders applied to Crackathon.<br>Only 75 made the cut. <br>Today, we are locking them in one room to <br>Build → Pitch → Get Funded. <a href="https://t.co/HNalRRwrzy">pic.twitter.com/HNalRRwrzy</a></p>&mdash; Antler India (@AntlerIndia) <a href="https://x.com/AntlerIndia/status/2078399329145090084?ref_src=twsrc%5Etfw">July 18, 2026</a></blockquote>
+      </div>
+    </div>
+  </section>
+  <script is:inline async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
+
+  <section class="page-section surface">
+    <div class="section-inner" style="text-align: center; max-width: 640px; margin: 0 auto;">
+      <p class="section-label">See the Build</p>
+      <h2
+        style="font-family: var(--font-display); font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 300; margin-bottom: 16px;">
+        One prompt. Everything published.</h2>
+      <p style="font-size: 0.875rem; font-weight: 300; color: var(--muted); line-height: 1.8; margin-bottom: 40px;">
+        copperhead is open source under Apache-2.0, and Open Telegraph is the board it was proven on. Read either one.</p>
+      <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+        <a href="https://github.com/chouhanindustries/copperhead" target="_blank" rel="noopener noreferrer"
+          class="btn-primary">copperhead on GitHub</a>
+        <a href="/assets/Copperhead.pdf" target="_blank" rel="noopener noreferrer" class="btn-secondary">The Deck
+          (PDF)</a>
+        <a href="/products/open-telegraph.html" class="btn-secondary">Open Telegraph</a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
