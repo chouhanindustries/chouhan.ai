@@ -1452,12 +1452,14 @@ a.product-card:hover {
   line-height: 1.9;
 }
 
-.article p a {
+.article p a,
+.article td a {
   color: var(--gold);
   border-bottom: 1px solid rgba(201, 168, 76, 0.3);
 }
 
-.article p a:hover {
+.article p a:hover,
+.article td a:hover {
   border-bottom-color: var(--gold);
 }
 
